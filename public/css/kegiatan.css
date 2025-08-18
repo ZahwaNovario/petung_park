@@ -1,0 +1,177 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.zoomimg {
+    cursor: zoom-in;
+}
+
+.kegiatan-detail {
+    background-color: #c2f7b5;
+    width: 100vw;
+    position: relative;
+    height: auto; /* Ubah dari min-height ke height: auto */
+    display: flex;
+    flex-direction: column;
+    color: #033a03;
+    align-items: center; 
+    justify-content: center;   
+}
+
+.kegiatan-detail h2 {
+    padding-top: 90px;
+    padding-bottom: 2px;
+    font-weight: bold;
+    text-align: center; /* Menyelarankan teks ke tengah */
+    font-size: 40px;
+}
+
+.kegiatan-info {
+    padding-bottom: 5px;
+    max-width: 600px; /* Menetapkan lebar maksimum untuk informasi kegiatan */
+    text-align: center; /* Meratakan teks di dalam .kegiatan-info */
+}
+.artikel {
+    display: flex; /* Mengaktifkan flexbox */
+    flex-direction: column; /* Menyusun item secara vertikal */
+    align-items: center; /* Meratakan konten secara horizontal */
+    justify-content: center; /* Meratakan konten secara vertikal */
+    background-color: #033a03; /* Warna latar belakang hijau tua */
+    color: #c2f7b5; /* Warna teks kuning */
+    width: 100%; /* Mengatur lebar 100% */
+    padding: 20px; /* Memberikan padding di dalam artikel */
+    box-sizing: border-box; /* Menambahkan padding ke dalam lebar total elemen */
+    min-height: 300px; /* Tinggi minimum untuk artikel agar tetap terlihat */
+}
+
+.artikel h3 {
+    padding-bottom: 15px;
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center; /* Menyelaraskan teks ke tengah */
+}
+.artikel p {
+    width: 900px; /* Menetapkan lebar maksimum untuk teks */
+    padding-bottom: 50px;
+    text-align: justify; /* Menyelaraskan teks ke tengah */
+}
+
+.gallery {
+    display: flex; /* Mengaktifkan Flexbox */
+    flex-wrap: wrap; /* Memungkinkan item membungkus ke baris berikutnya */
+    justify-content: center; /* Menyelaraskan gambar ke tengah */
+    margin-top: 5px; /* Jarak atas antara galeri dan konten lain */
+    padding-bottom: 20px;
+}
+
+.gallery-item {
+    background-color: white; /* Latar belakang putih untuk border luar */
+    border: 2px solid #ddd; 
+    padding: 10px; /* Jarak antara gambar dan tepi galeri-item */
+    margin: 10px; /* Menambahkan jarak antar item galeri */
+    flex: 1 0 30%; /* Fleksibel untuk mengambil 30% dari lebar kontainer */
+    box-sizing: border-box; /* Memastikan padding dan border termasuk dalam lebar total */
+    max-width: 300px; /* Lebar maksimum untuk setiap galeri-item */
+    text-align: center; /* Memastikan gambar, nama, dan deskripsi berada di tengah */
+}
+
+.gallery-img {
+    height: 200px;
+    width: 100%; /* Mengatur lebar gambar 100% dari .gallery-item */
+    object-fit: cover; /* Mengatur gambar agar sesuai dengan ukuran */
+}
+
+.btn-kembali {
+    background-color: #c2f7b5; /* Warna latar belakang tombol */
+    color: #033a03; /* Warna teks tombol */
+    padding: 10px 15px; /* Padding di dalam tombol */
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    border: 0px;
+    font-size: medium;
+    display: inline-block; /* Menyusun tombol dalam satu baris */
+    margin-bottom: 20px; /* Jarak bawah untuk memisahkan dari elemen di bawahnya */
+    position: absolute; /* Menggunakan posisi absolut untuk menempatkan tombol */
+    left: 20px; /* Jarak dari kiri */
+    top: 40px; /* Jarak dari atas */
+    font-weight: bold; /* Menebalkan teks tombol */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
+.like-button-article {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #295A3F;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #295A3F;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.like-button-article {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.like-button-article:hover {
+    background-color: #295A3F;
+    color: #ffffff;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.like-button {
+    border: none; /* Menghapus border */
+    background: none; /* Menghapus background default */
+    padding: 0; /* Menghapus padding default */
+    cursor: pointer; /* Mengubah cursor menjadi pointer */
+}
+
+.btn-kembali:hover {
+    color: #000000; /* Warna teks saat hover */
+}
+/* Responsif untuk tampilan handphone */
+@media (max-width: 768px) {
+
+    .kegiatan-detail h2 {
+        font-size: 24px; /* Ukuran font untuk judul kegiatan di handphone */
+        padding-top: 30%; /* Mengurangi padding atas untuk tampilan handphone */
+    }
+
+    .kegiatan-info {
+        padding-bottom: 10px; /* Mengurangi padding bawah di handphone */
+        max-width: 90%; /* Memperbesar lebar maksimum di handphone */
+    }
+
+    .artikel h3 {
+        font-size: 28px; /* Ukuran font untuk h3 di handphone */
+    }
+
+    .artikel p {
+        width: 90%; /* Memperbesar lebar maksimum untuk teks di handphone */
+    }
+
+    .gallery-item {
+        flex: 1 0 45%; /* Mengubah ukuran galeri item agar lebih lebar di handphone */
+        max-width: 90%; /* Memperbesar lebar maksimum untuk galeri-item di handphone */
+    }
+
+    .gallery-img {
+        height: 150px; /* Mengurangi tinggi gambar di handphone */
+    }
+
+    .btn-kembali {
+        top: 70px; /* Mengatur posisi tombol untuk handphone */
+        left: 10px; /* Mengatur posisi tombol untuk handphone */
+    }
+}
+

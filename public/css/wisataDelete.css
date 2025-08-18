@@ -1,0 +1,55 @@
+body {
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 400px; /* Ukuran lebih kecil dibandingkan tabel */
+    margin: 0 auto; /* Pusatkan kontainer */
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+h1 {
+    text-align: center; /* Pusatkan teks judul */
+    color: #557C56; /* Warna hijau untuk judul */
+}
+
+.wisata-details {
+    margin: 20px 0; /* Jarak vertikal untuk detail wisata */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: darkred;
+}
+
+.btn-secondary {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: darkgray;
+}

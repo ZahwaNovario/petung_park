@@ -1,0 +1,22 @@
+/* Background untuk seluruh halaman */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0; /* Hapus margin */
+    padding: 20px; /* Padding di dalam halaman */
+}
+
+/* Styling untuk judul */
+h1 {
+    text-align: center; /* Pusatkan teks judul */
+    color: #557C56; /* Warna hijau untuk judul */
+}
+
+/* Efek hover untuk tombol */
+.btn-success:hover {
+    background-color: darkgreen; /* Warna latar belakang saat hover untuk tombol simpan */
+}
+
+.btn-secondary:hover {
+    background-color: darkgray; /* Warna latar belakang saat hover untuk tombol kembali */
+}

@@ -1,0 +1,245 @@
+body,
+html {
+    body, html {
+        background-color: #246140;
+        min-height: 100%;
+    }
+    
+}
+.container-main{
+    padding-bottom: 0px;
+    background-color: #246140;
+}
+.zoomimg {
+    cursor: zoom-in;
+}
+/* Styling kategori-wisata */
+.kategori-wisata {
+    background-color: #246140;
+    padding: 10px 0; /* Full width background */
+    width: 100vw;
+    position: relative;
+    min-height: 81vh; /* Pastikan kategori-wisata memenuhi tinggi layar */
+}
+
+.kategori-header {
+    display: flex; /* Menambahkan flexbox untuk tata letak */
+    align-items: center; /* Vertikal align item */
+    justify-content: center; /* Horizontal center item */
+    font-size: 30px;
+}
+
+.kategori-wisata h2 {
+    color: #E2DD6C;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 35px 0; /* Jarak atas dan bawah */
+    text-align: center; /* Judul di tengah */
+    padding-top: 70px;
+}
+.galeri-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #246140;
+}
+
+.galeri-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Jarak antar item galeri */
+    justify-content: center; /* Mengatur agar item galeri berada di tengah */
+    background-color: #246140;
+}
+
+.galeri-item {
+    background-color: white; /* Latar belakang putih untuk border luar */
+    border: 2px solid #ddd; /* Border dengan warna abu-abu */
+    padding: 10px; /* Jarak antara gambar dan tepi galeri-item */
+    text-align: center; /* Memastikan gambar, nama, dan deskripsi berada di tengah */
+    width: 320px; /* Lebar galeri-item, sedikit lebih besar dari gambar untuk menampung padding */
+    height: auto; /* Menyesuaikan tinggi otomatis */
+}
+
+.galeri-item img {
+    width: 300px;  /* Mengatur ukuran gambar menjadi 300x300 */
+    height: 300px;
+    object-fit: cover; /* Menyesuaikan gambar agar tidak terpotong */
+    margin-bottom: 10px; /* Jarak antara gambar dan teks */
+}
+
+.galeri-item p {
+    font-size: 16px; /* Ukuran font untuk deskripsi dan nama */
+    color: #246140; /* Warna teks yang sedikit gelap */
+    font-weight: bold;
+    margin: 5px 0; /* Jarak antar teks */
+}
+
+
+/* Styling untuk tombol Kembali */
+.btn-kembali {
+    font-size: medium;
+    background-color: #246140; /* Warna latar belakang tombol */
+    color: #E2DD6C; /* Warna teks tombol */
+    padding: 10px 15px; /* Padding di dalam tombol */
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    border: 0px;
+    display: inline-block; /* Menyusun tombol dalam satu baris */
+    margin-bottom: 20px; /* Jarak bawah untuk memisahkan dari elemen di bawahnya */
+    position: absolute; /* Menggunakan posisi absolut untuk menempatkan tombol */
+    left: 20px; /* Jarak dari kiri */
+    top: 70px; /* Jarak dari atas */
+    font-weight: bold; /* Menebalkan teks tombol */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+/* Hover effect untuk tombol Kembali */
+.btn-kembali:hover {
+    background-color: #246140;
+    color: white;
+}
+
+/* Styling gambar wisata */
+.wisata-gambar {
+    width: 400px;  /* Mengatur lebar gambar */
+    height: 400px; /* Mengatur tinggi gambar */
+    position: relative;
+    left: 500px; /* Jarak 400px dari kiri */
+    top: 10px; /* Jarak dari atas */
+    margin-bottom: 30px; /* Jarak 30px dari footer */
+}
+
+/* Container untuk gambar dan detail wisata */
+.wisata-container {
+    display: flex;
+    flex-direction: column; /* Mengatur konten secara vertikal */
+    align-items: center; /* Membuat seluruh konten menjadi rata tengah */
+    justify-content: center; /* Membuat konten berada di tengah secara vertikal */
+    margin-top: 30px; /* Jarak dari atas */
+    text-align: center; /* Mengatur teks deskripsi agar berada di tengah */
+    width: 100%; /* Memastikan container mengambil seluruh lebar layar */
+    padding: 0 20px; /* Memberikan padding kiri dan kanan untuk tampilan lebih rapi */
+}
+
+.wisata-container p {
+    max-width: 800px; /* Batas lebar deskripsi agar tidak terlalu panjang di layar besar */
+    line-height: 1.6; /* Meningkatkan keterbacaan dengan spasi antar baris */
+    font-size: 18px; /* Menyesuaikan ukuran teks deskripsi */
+    color: #E2DD6C; /* Warna teks deskripsi */
+}
+
+.like-container {
+    text-align: center; /* Menempatkan tombol di tengah */
+    margin-top: 20px; /* Jarak dari galeri */
+}
+
+.like-button {
+    font-size: 24px; /* Ukuran tombol */
+    background: none; /* Tanpa background */
+    border: none; /* Tanpa border */
+    cursor: pointer; /* Menunjukkan bisa di klik */
+    color: #7a0707; /* Warna sesuai dengan tema */
+    transition: transform 0.2s; /* Efek transisi */
+}
+
+.like-button:hover {
+    transform: scale(1.1); /* Efek zoom saat hover */
+}
+
+.like-button-travel {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #295A3F;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #295A3F;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.like-button-travel {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.like-button-travel:hover {
+    background-color: #295A3F;
+    color: #ffffff;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.like-count {
+    font-weight: bold;
+    cursor: pointer;
+    color: #7a0707;
+}
+.wisata-detail {
+    margin-left: 30%; /* Jarak 30px dari gambar */
+    text-align: left; /* Tulisan rata kiri */
+    color: #E2DD6C;
+}
+
+.wisata-detail h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Jarak bawah dari judul ke deskripsi */
+    color: #E2DD6C;
+}
+
+.wisata-detail p {
+    padding-top: 10px;
+    font-size: 20px;
+    margin-bottom: 50px; /* Jarak 20px di bawah deskripsi */
+    color: #E2DD6C;
+}
+
+.wisata-detail .harga {
+    font-size: 15px;
+    font-weight: normal;
+    color: #E2DD6C;
+    margin-bottom: 0px; /* Jarak 30px antara harga dan elemen di bawahnya */
+}
+
+/* Styling untuk tulisan Rekomendasi */
+.wisata-detail .rekomendasi {
+    font-size: 20px;
+    font-style: italic;
+    color: #E2DD6C;
+    margin-bottom: 0px; /* Jarak antara rekomendasi dan tombol hati */
+}
+/* Penyesuaian untuk layar handphone */
+@media (max-width: 768px) {
+    
+    /* Styling untuk wisata di layar kecil */
+    .wisata-gambar {
+        width: auto;  /* Gambar lebih kecil agar sesuai dengan layar handphone */
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%); /* Mengatur agar gambar berada di tengah layar */
+        margin-bottom: 10px; /* Jarak 10px dari wisata container */
+    }
+
+    .wisata-container {
+        flex-direction: column; /* Mengatur agar gambar dan detail vertikal pada layar kecil */
+        align-items: center;
+        margin-top: 10px; /* Jarak 10px dari gambar */
+    }
+
+    .wisata-detail {
+        margin-left: 0; /* Hilangkan jarak di layar kecil */
+        text-align: center; /* Teks rata tengah pada layar kecil */
+    }
+
+    /* Atur jarak kategori-header h2 dari atas */
+    .kategori-header h2 {
+        margin-top: 60px; /* Beri jarak 30px dari atas pada layar kecil */
+    }
+    /* Posisi tombol Kembali di bagian bawah kiri header */
+    .btn-kembali {
+        top: 70px; /* Mengatur posisi tombol untuk handphone */
+        left: 10px; /* Mengatur posisi tombol untuk handphone */
+    }
+}

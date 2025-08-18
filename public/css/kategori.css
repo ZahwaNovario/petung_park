@@ -1,0 +1,151 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.zoomimg {
+    cursor: zoom-in;
+}
+
+/* Styling kategori-makanan */
+.kategori-makanan {
+    background-color: #E2DD6C;
+    padding: 10px 0;
+    width: 100vw;
+    position: relative;
+    min-height: 81vh;
+}
+
+.kategori-makanan h2 {
+    color: #295A3F;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+/* Container makanan dengan Flexbox untuk responsivitas */
+.makanan-container {
+    display: flex;
+    justify-content: space-around; /* Mengatur jarak antar elemen makanan */
+    flex-wrap: wrap; /* Membuat elemen makanan membungkus ketika ruang tidak cukup */
+    padding: 0 15px;
+}
+
+/* Styling untuk tiap elemen makanan */
+.makanan {
+    width: 30%; /* Set lebar elemen makanan menjadi 30% */
+    margin: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Styling gambar makanan dengan tinggi yang konsisten */
+.makanan img {
+    width: 100%; /* Mengatur gambar agar mengikuti lebar kontainer */
+    max-width: 300px; /* Maksimal lebar gambar 300px */
+    height: 300px; /* Set tinggi gambar secara konsisten */
+    object-fit: cover; /* Agar gambar tetap proporsional dan tidak terdistorsi */
+    border: 5px solid #295A3F;
+    border-radius: 10px;
+}
+
+/* Styling judul dan deskripsi makanan */
+.makanan .judul-makanan {
+    color: #295A3F;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    font-size: 30px;
+}
+
+.makanan .deskripsi-makanan {
+    color: #295A3F;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+/* Styling tombol untuk makanan */
+.makanan button {
+    background-color: #295A3F;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.makanan button:hover {
+    background-color: #3b7a53;
+}
+
+/* Styling untuk tombol Kembali */
+.btn-kembali {
+    background-color: #E2DD6C;
+    color: #295A3F;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 0px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    position: relative;
+    display: block;
+    text-align: left;
+    left: 20px;
+    top: 40px;
+    font-weight: bold;
+    font-size: medium;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect untuk tombol Kembali */
+.btn-kembali:hover {
+    background-color: #E2DD6C;
+    color: black;
+}
+
+/* Penyesuaian untuk ukuran layar 1024px dan lebih besar */
+@media (max-width: 1024px) {
+    .makanan {
+        width: 45%; /* Gambar dan konten makanan akan menyesuaikan dengan lebar layar */
+        margin: 10px;
+    }
+
+    .makanan img {
+        width: 100%; /* Gambar akan menyesuaikan lebar kontainer */
+        max-width: 250px; /* Lebar gambar tetap terkontrol */
+        height: 250px; /* Menjaga tinggi gambar konsisten */
+    }
+
+    .kategori-makanan h2 {
+        font-size: 35px; /* Menurunkan ukuran font untuk header kategori */
+    }
+
+    .makanan-container {
+        justify-content: space-evenly; /* Mengatur elemen makanan agar lebih seimbang */
+    }
+}
+
+/* Penyesuaian untuk perangkat lebih kecil (max-width: 768px) */
+@media (max-width: 768px) {
+    .makanan {
+        width: 45%; /* Mengubah ukuran menjadi lebih kecil agar muat 2 elemen per baris */
+        margin: 10px;
+    }
+
+    .makanan img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .btn-kembali {
+        top: 40px;
+        left: 10px;
+    }
+}

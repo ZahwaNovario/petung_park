@@ -1,0 +1,42 @@
+/* Background untuk seluruh halaman */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0; /* Hapus margin */
+    padding: 20px; /* Padding di dalam halaman */
+}
+
+/* Styling untuk judul */
+h1 {
+    text-align: center;
+    color: #28a745; /* Hijau */
+}
+.judul{
+    text-align: center;
+    color: #28a745; /* Hijau */
+}
+/* Efek hover untuk tombol */
+.btn-primary:hover {
+    background-color: #3A5F3D; /* Warna latar belakang saat hover untuk tombol simpan */
+}
+
+.btn-secondary:hover {
+    background-color: darkgray; /* Warna latar belakang saat hover untuk tombol kembali */
+}
+
+/* Styling untuk form input */
+.form-group label {
+    font-weight: bold;
+    color: #000000; 
+}
+
+.form-control {
+    border: 1px solid #557C56; /* Border hijau untuk input */
+    border-radius: 1px;
+}
+
+/* Gaya hover untuk input */
+.form-control:focus {
+    border-color: #3A5F3D;
+    box-shadow: 0 0 5px rgba(85, 124, 86, 0.5);
+}

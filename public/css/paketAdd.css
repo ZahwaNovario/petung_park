@@ -1,0 +1,32 @@
+body {
+    background-color: #FFFBE6;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #557C56;
+}
+
+/* Styling untuk tombol */
+.btn {
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.text-center button {
+    margin: 5px;
+}
+
+/* Styling untuk form input */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Styling untuk label */
+label {
+    font-weight: bold;
+    color: #557C56;
+}

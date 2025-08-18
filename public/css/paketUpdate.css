@@ -1,0 +1,71 @@
+/* Background untuk seluruh halaman */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0; /* Hapus margin */
+    padding: 20px; /* Padding di dalam halaman */
+}
+
+/* Styling untuk container */
+.container {
+    max-width: 600px; /* Lebar maksimal kontainer */
+    margin: 0 auto; /* Pusatkan kontainer */
+    background: white; /* Warna latar belakang kontainer */
+    padding: 20px; /* Padding di dalam kontainer */
+    border-radius: 5px; /* Radius border kontainer */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+/* Styling untuk judul */
+h1 {
+    text-align: center; /* Pusatkan teks judul */
+    color: #557C56; /* Warna hijau untuk judul */
+}
+
+/* Styling untuk form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling untuk label dan input */
+label {
+    margin-top: 10px;
+}
+
+input, select {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Styling tombol simpan dan kembali */
+.btn-secondary {
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.btn-success {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+/* Efek hover untuk tombol */
+.btn-secondary:hover {
+    background-color: darkgray;
+}
+
+.btn-success:hover {
+    background-color: darkgreen;
+}

@@ -1,0 +1,269 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.zoomimg {
+    cursor: zoom-in;
+}
+
+/* Styling untuk kategori-makanan */
+.kategori-makanan {
+    background-color: #E2DD6C;
+    padding: 10px 0;
+    width: 100vw;
+    position: relative;
+}
+
+.kategori-makanan h2 {
+    color: #295A3F;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 35px 0;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.makanan-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
+}
+
+.makanan {
+    width: 30%;
+    margin: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.makanan img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid #295A3F;
+    border-radius: 10px;
+}
+
+.makanan .judul-makanan {
+    color: #295A3F;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    font-size: 30px;
+}
+
+.makanan .deskripsi-makanan {
+    color: #295A3F;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.makanan button {
+    background-color: #295A3F;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.makanan button:hover {
+    background-color: #3b7a53;
+}
+
+/* Styling untuk kategori-wisata */
+.kategori-wisata {
+    background-color: #295A3F;
+    padding: 10px 0;
+    width: 100vw;
+    position: relative;
+}
+
+.kategori-wisata h2 {
+    color: #E2DD6C;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 35px 0;
+    text-align: center;
+}
+
+.wisata-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
+}
+
+.wisata {
+    width: 30%;
+    margin: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.wisata img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid #E2DD6C;
+    border-radius: 10px;
+}
+
+.wisata .judul-wisata {
+    color: #E2DD6C;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    font-size: 30px;
+}
+
+.wisata .deskripsi-wisata {
+    color: #E2DD6C;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.wisata button {
+    background-color: #E2DD6C;
+    color: #295A3F;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.wisata button:hover {
+    background-color: #d4ca5b;
+}
+
+/* Styling untuk kategori-paket */
+.kategori-paket {
+    /* background-color: #D7E4C0;  */
+    background-color: #A0D0B3;  
+    padding: 10px 0;
+    width: 100vw;
+    position: relative;
+}
+
+.kategori-paket h2 {
+    color: #254336; 
+    font-size: 40px;
+    font-weight: bold;
+    margin: 35px 0;
+    text-align: center;
+}
+
+.paket-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
+}
+
+.paket {
+    width: 30%;
+    margin: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.paket img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid #254336; 
+    border-radius: 10px;
+}
+
+.paket .judul-paket {
+    color: #254336; /* Sama seperti judul wisata */
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 1px;
+    font-size: 30px;
+}
+
+.paket .deskripsi-paket {
+    color: #254336;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.paket button {
+    background-color: #254336;
+    color: #D7E4C0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.paket button:hover {
+    background-color: #1A1A19; 
+}
+
+@media (max-width: 1024px) {
+    .makanan {
+        width: 45%; /* Gambar dan konten makanan akan menyesuaikan dengan lebar layar */
+        margin: 10px;
+    }
+
+    .makanan img {
+        width: 100%; /* Gambar akan menyesuaikan lebar kontainer */
+        max-width: 250px; /* Lebar gambar tetap terkontrol */
+        height: 250px; /* Menjaga tinggi gambar konsisten */
+    }
+
+    .kategori-makanan h2, .kategori-wisata h2, .kategori-paket h2 {
+        font-size: 35px; /* Menurunkan ukuran font untuk header kategori */
+    }
+
+    .makanan-container, .wisata-container, .paket-container {
+        justify-content: space-evenly; /* Mengatur elemen makanan agar lebih seimbang */
+    }
+}
+
+/* Responsif untuk tampilan handphone */
+@media (max-width: 768px) {
+
+    /* Kategori Makanan */
+    .makanan {
+        width: 45%;
+        margin: 10px;
+    }
+
+    .makanan img {
+        width: 90%;
+        height: 200px;
+        object-fit: cover; /* Agar gambar menyesuaikan ukuran tanpa distorsi */
+    }
+
+    /* Kategori Wisata */
+    .wisata {
+        width: 45%;
+        margin: 10px;
+    }
+
+    .wisata img {
+        width: 90%;
+        height: 200px;
+        object-fit: cover; /* Agar gambar menyesuaikan ukuran tanpa distorsi */
+    }
+
+    .paket {
+        width: 45%;
+        margin: 10px;
+    }
+
+    .paket img {
+        width: 90%;
+        height: 200px;
+        object-fit: cover; /* Agar gambar menyesuaikan ukuran tanpa distorsi */
+    }
+}
+

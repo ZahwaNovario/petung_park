@@ -1,0 +1,348 @@
+body {
+    height: 100vh;
+    background-image: url('/images/login/bambu.jpg'); /* Gambar latar belakang */
+    background-size: cover; /* Memastikan gambar menutupi seluruh latar belakang */
+    background-position: center; /* Memusatkan gambar */
+    background-repeat: no-repeat; /* Mencegah gambar mengulang */
+    background-attachment: fixed; /* Memastikan latar belakang tetap saat menggulir */
+    font-family: Arial, sans-serif;
+    margin: 0; /* Pastikan tidak ada margin pada body */
+    position: relative; /* Mengatur posisi relative untuk kontainer overlay */
+    overflow: hidden;
+}
+body .swal2-container {
+    z-index: 9999 !important; /* Set SweetAlert's container z-index higher */
+}
+.swal-popup-custom {
+    z-index: 9999 !important;  /* Ensure SweetAlert is on top of all content */
+}
+.container-fluid {
+    height: 100vh; /* Menjamin kontainer mengisi tinggi penuh */
+    display: flex;
+    align-items: center; /* Memusatkan secara vertikal */
+    justify-content: center; /* Memusatkan secara horizontal */
+}
+
+.login-container {
+    max-width: 600px;
+    background-color: white;
+    padding: 40px; /* Padding untuk ruang di dalam kontainer */
+    padding-left: 60px;
+    border-radius: 10px; /* Sudut melengkung */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Bayangan untuk efek kedalaman */
+    display: flex;
+    flex-direction: column; /* Mengatur elemen di dalam kontainer secara vertikal */
+    align-items: center; /* Memusatkan konten secara horizontal */
+    text-align: center; /* Memastikan teks di dalamnya berada di tengah */
+}
+
+.form-group {
+    padding-bottom: 5px; /* Mengurangi padding bawah */
+    margin-bottom: 0; /* Pastikan tidak ada margin bawah */
+    font-size: 20px;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Membuat label sejajar dengan textbox */
+}
+
+.form-group label {
+    display: flex;
+    align-items: center; /* Memusatkan label secara vertikal */
+    justify-content: flex-start; /* Rata kiri */
+    font-size: 15px;
+    margin-bottom: 0; /* Menghapus margin bawah */
+    text-align: left; /* Memastikan label tetap rata kiri */
+    width: 100%; /* Menjaga lebar label sesuai kebutuhan */
+    color: #1e4633;
+}
+
+.form-group .col-md-8 {
+    display: flex;
+    align-items: center; /* Memastikan input berada di tengah */
+    justify-content: center; /* Memusatkan input di dalam kolom */
+}
+
+.error-message {
+    display: flex;
+    justify-content: center; /* Rata tengah secara horizontal */
+    margin-top: 5px; /* Jarak antara input dan pesan error */
+    padding-right: 30px;
+}
+
+.error-message span {
+    display: block;
+    text-align: center; /* Memastikan teks di dalam span rata tengah */
+    font-size: 14px;
+    color: #d9534f; /* Warna merah untuk pesan error */
+}
+
+
+.invalid-feedback {
+    margin-top: 1px; /* Mengatur jarak atas untuk pesan error */
+    margin-bottom: 0; /* Mengatur jarak bawah ke 0 */
+    font-size: 14px; /* Ukuran font pesan error */
+}
+
+/* Pastikan input memenuhi lebar penuh container */
+/* Pastikan input memiliki lebar yang sama dengan form-group */
+.email, .password {
+    width: 100% !important; /* Sesuaikan dengan form-group */
+    padding: 10px;
+    font-size: 20px;
+    border: 6px solid #295A3F;
+    border-radius: 10px;
+    color: #295A3F;
+    background-color: white;
+    box-sizing: border-box; /* Pastikan padding tidak mempengaruhi ukuran */
+    display: block;
+}
+
+/* Hapus efek saat input ditekan atau dihover */
+.email:focus, .password:focus,
+.email:hover, .password:hover {
+    border-color: #295A3F !important; /* Tetap gunakan warna asli */
+    box-shadow: none !important; /* Hapus efek bayangan */
+    outline: none !important; /* Hapus outline */
+    background-color: white !important; /* Tetap putih */
+    color: #295A3F !important; /* Warna tetap */
+}
+
+/* Pastikan kontainer pembungkus juga memiliki lebar penuh */
+/* Pastikan semua elemen dalam .form-group memiliki lebar penuh */
+.form-group {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+/* Pastikan kolom label dan input memiliki proporsi yang benar */
+.form-group .col-md-4 {
+    display: flex;
+    justify-content: flex-end; /* Pastikan label tetap rata kanan */
+    align-items: center;
+    text-align: right;
+}
+
+.form-group .col-md-8 {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+/* Pastikan input mengisi lebar penuh */
+.form-control {
+    width: 100% !important;
+    padding: 10px;
+    font-size: 20px;
+    border: 6px solid #295A3F;
+    border-radius: 10px;
+    color: #295A3F;
+    background-color: white;
+    box-sizing: border-box; /* Pastikan padding tidak menambah ukuran */
+}
+
+
+
+/* Hapus efek hover dan focus */
+.form-control:focus,
+.form-control:hover {
+    border-color: #295A3F !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: white !important;
+    color: #295A3F !important;
+}
+
+
+.custom-checkbox {
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid #295A3F !important;
+    appearance: none !important;
+    background-color: white !important;
+}
+
+.custom-checkbox:checked {
+    background-color: #295A3F !important; /* Ganti warna saat checkbox di-check */
+    border-color: #295A3F !important;
+}
+
+/* Ikon centang atau simbol untuk status "checked" */
+.custom-checkbox:checked::before {
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remember-me-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    padding-right: 10pt;
+}
+
+/* Memastikan checkbox dan label sejajar tanpa bertumpukan */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Memberikan jarak antara checkbox dan label */
+    margin-bottom: 0;
+    padding-inline-start: 8%;
+}
+
+/* Menghapus align-items dan justify-content yang tidak perlu */
+.form-check-input {
+    margin: 0; /* Menghapus margin bawaan */
+    width: 20px; /* Atur ukuran checkbox */
+    height: 20px;
+}
+
+/* Memastikan label tetap sejajar dengan checkbox */
+.form-check-label {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+/* Tombol "Forgot Your Password?" */
+.form-group .forgot-password-link {
+    margin-left: auto; /* Tarik ke kanan */
+    color: #295A3F;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+    padding-inline-end: 10%;
+}
+
+/* Styling tombol "Login" */
+.inputLogin button {
+    margin-top: 20px;
+}
+
+
+.form-group a {
+    color: #295A3F; /* Warna teks Forgot Your Password */
+    text-decoration: underline; /* Menggarisbawahi teks */
+    margin-left: auto; /* Menempatkan Forgot Password di sebelah kanan */
+    cursor: pointer; /* Menambahkan pointer pada hover */
+    white-space: nowrap; /* Mencegah teks terputus ke bawah */
+}
+.login-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #295A3F;
+    margin-bottom: 40px;
+}
+.inputLogin{
+    align-items: center;
+    align-content: center;
+}
+
+.inputLogin input {
+    font-size: 20px;
+    border: 6px solid #295A3F;
+    border-radius: 10px;
+    color: #295A3F;
+    background-color: white;
+    width: 100%; /* Memastikan input mengisi lebar kontainer */
+}
+
+.inputLogin input::placeholder {
+    color: #295A3F;
+}
+
+.inputLogin button {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: #295A3F;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+.inputLogin button:hover {
+    background-color: #1e4633;
+    color: rgb(255, 255, 255);
+}
+
+.signup-container {
+    display: flex;
+    align-items: center; /* Pusatkan teks dan tombol secara vertikal */
+    justify-content: center; /* Pusatkan secara horizontal */
+    margin-top: 5px; /* Jarak atas dari elemen sebelumnya */
+    margin-left: 15px;
+}
+
+.signup-container p {
+    font-size: 20px; /* Ukuran font untuk teks */
+    color: black;
+    margin: 0; /* Menghapus margin default */
+    white-space: nowrap; /* Mencegah teks terputus ke bawah */
+    margin-left: 10px;
+}
+
+.signup-container button {
+    font-size: 20px; /* Ukuran font untuk tombol */
+    color: #295A3F;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.signup-container button:hover {
+    color: #1e4633;
+    background: none;
+}
+
+
+/* Media Queries for mobile responsiveness */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 20px;
+    }
+
+    .login-title {
+        font-size: 30px;
+        margin: auto;
+    }
+
+    .inputLogin input,
+    .inputLogin button {
+        font-size: 18px;
+        width: 100%; /* Memastikan elemen mengisi lebar kontainer pada perangkat kecil */
+    }
+
+    .signup-container p,
+    .signup-container button {
+        font-size: 15px;
+    }
+
+    .form-group.row.mb-3{
+        padding-inline-start: 5%;
+    }
+
+    .form-check {
+        width: 100%;
+        margin-left: 10pt;
+    }
+    .form-group .form-check-label{
+        font-size: 15px;
+    }
+    .form-group .forgot-password-link {
+        padding-inline-start: 20%;
+        width: 100%;
+        text-align: center;
+    }
+}

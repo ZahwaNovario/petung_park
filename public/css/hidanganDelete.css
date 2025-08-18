@@ -1,0 +1,55 @@
+body {
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0; /* Hapus margin */
+    padding: 20px; /* Padding di dalam halaman */
+}
+
+.container {
+    max-width: 400px; /* Ukuran lebih kecil dibandingkan tabel */
+    margin: 0 auto; /* Pusatkan kontainer */
+    background: white; /* Warna latar belakang kontainer */
+    padding: 20px; /* Padding di dalam kontainer */
+    border-radius: 5px; /* Radius border kontainer */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+h1 {
+    text-align: center; /* Pusatkan teks judul */
+    color: #557C56; /* Warna hijau untuk judul */
+}
+
+.hidangan-details {
+    margin: 20px 0; /* Jarak vertikal untuk detail hidangan */
+    padding: 10px; /* Padding untuk detail */
+    border: 1px solid #ccc; /* Border untuk detail */
+    border-radius: 5px; /* Radius border */
+    background: #f9f9f9; /* Warna latar belakang detail */
+}
+
+.btn-danger {
+    background-color: red; /* Warna latar belakang tombol hapus */
+    color: white; /* Warna teks tombol */
+    padding: 10px; /* Padding untuk tombol */
+    margin-top: 15px; /* Jarak atas untuk tombol */
+    border: none; /* Hapus border */
+    border-radius: 3px; /* Radius border */
+    cursor: pointer; /* Ubah kursor saat hover */
+}
+
+.btn-danger:hover {
+    background-color: darkred; /* Warna latar belakang saat hover tombol hapus */
+}
+
+.btn-secondary {
+    background-color: gray; /* Warna latar belakang tombol kembali */
+    color: white; /* Warna teks tombol */
+    padding: 10px; /* Padding untuk tombol */
+    margin-top: 15px; /* Jarak atas untuk tombol */
+    border: none; /* Hapus border */
+    border-radius: 3px; /* Radius border */
+    cursor: pointer; /* Ubah kursor saat hover */
+}
+
+.btn-secondary:hover {
+    background-color: darkgray; /* Warna latar belakang saat hover tombol kembali */
+}

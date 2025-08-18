@@ -1,0 +1,367 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background: #ecf78e;
+}
+
+/* Slider styles */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    position: relative;
+    /* Make the slide relative for absolute positioning of overlay */
+}
+
+/* .slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1; 
+} */
+
+
+.text {
+    background: rgba(0, 0, 0, 0.8);
+    /* Warna background dengan transparansi */
+    color: #fff;
+    /* Warna teks */
+    padding: 10px 20px;
+    /* Spasi di dalam latar */
+    border-radius: 10px;
+    /* Sudut membulat */
+    text-align: center;
+    max-width: 80%;
+    /* Batasi lebar teks */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Efek bayangan */
+}
+
+.slide h1 {
+    font-size: 5vw;
+    font-weight: bold;
+    z-index: 2;
+
+}
+
+.slide p {
+    font-size: 25px;
+    z-index: 2;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.nav-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.title-section {
+    background-image: url('/images/beranda/berandaPetungPark.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.title-beranda {
+    font-size: 50px;
+}
+
+.con-video {
+    height: 700px;
+    width: 1244px;
+    background-color: #ecf78e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.video-frame {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+
+
+.desc-beranda {
+    font-size: 20px;
+}
+
+.title {
+    font-size: 8vw;
+    font-weight: bold;
+}
+
+.title-konten {
+    font-size: 30px;
+}
+
+.desc-lokasi {
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.text-bottom {
+    vertical-align: text-bottom;
+}
+
+.description {
+    font-size: 20px;
+}
+
+.denah-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Kelas Kustom untuk Galeri */
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    flex-grow: 1;
+}
+
+/* Frame for the image */
+.frame-image {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    cursor: zoom-in
+}
+
+.galeri-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Text styling */
+.text-image,
+.desc-image {
+    color: #295A3F;
+    font-size: 12px;
+    margin-bottom: 5px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-image {
+    margin-bottom: 8px;
+}
+
+/* Adjusted desc-image */
+.desc-image {
+    font-size: 10px;
+    max-height: none;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    text-align: center;
+}
+
+/* The like button */
+.like-button {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #295A3F;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #295A3F;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.like-button .like-icon {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.like-button:hover {
+    background-color: #295A3F;
+    color: #ffffff;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.col img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.img-lokasi {
+    /* height: 200px;
+    width: 300px; */
+    padding-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+}
+
+/* Kelas Kustom untuk Galeri */
+.bg-custom {
+    background-color: #295A3F;
+}
+
+/* Kelas Kustom untuk Lokasi */
+.bg-location {
+    background-color: #A1D0B3;
+}
+
+@media (max-width: 768px) {
+
+    /* Slider styles */
+    .col img {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .slider-container {
+        height: 50vh;
+    }
+
+    .slide {
+        height: 50vh;
+        padding: 40px 60px;
+        /* More padding on small screens */
+        justify-content: center;
+    }
+
+    .slide h1 {
+        font-size: 8vw;
+    }
+
+    .slide p {
+        padding: 10px;
+        /* Adjust text padding for smaller screens */
+        margin: 0;
+        /* Remove any default margin */
+        font-size: 16px;
+        text-align: center;
+    }
+
+    /* Title section */
+    .title-section {
+        height: 50vh;
+        padding: 5%;
+    }
+
+    .title-beranda {
+        font-size: 24px;
+    }
+
+    .con-video {
+        width: 100%;
+        height: 50vh;
+    }
+
+    /* Konten teks */
+    .desc-beranda,
+    .desc-lokasi,
+    .description {
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 12vw;
+    }
+
+    .title-konten {
+        font-size: 20px;
+    }
+
+    /*Google Map*/
+    .img-lokasi {
+        width: 100%;
+        height: 250px;
+        padding-bottom: 10px;
+    }
+
+    /* Image frame */
+    .frame-image {
+        align-items: center;
+        height: auto;
+        width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .galeri-image {
+        max-height: 150px;
+        max-width: 200px;
+    }
+}

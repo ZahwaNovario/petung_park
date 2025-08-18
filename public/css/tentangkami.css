@@ -1,0 +1,107 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+.info1 {
+    background-color: #449E47;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Ensure no padding */
+}
+
+.text-info1 h2 {
+    padding-top: 70px; /* You can adjust or remove this if needed */
+}
+
+.text-info1 {
+    color: white;
+    text-align: left;
+    padding: 20px 10px;
+    margin: 0 25px; /* Adjust margin to remove extra space */
+}
+
+.gambar-info1 {
+    width: 40%;
+    height: auto; /* Change height to auto */
+    margin-left: 20px;
+    object-fit: cover;
+}
+
+/* Styling untuk info2 */
+.info2 {
+    background-color: #295A3F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Remove padding */
+}
+
+.gambar-info2 {
+    width: 900px;
+    height: 400px;
+    object-fit: cover;
+    margin: 0; /* Remove margin */
+}
+
+/* Styling untuk info3 */
+.info3 {
+    background-color: #A0D0B3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Remove padding */
+    flex-direction: row-reverse;
+}
+
+.text-info3 {
+    color: #295A3F;
+    text-align: right;
+    padding: 20px 10px;
+    margin: 0 25px; /* Adjust margin */
+}
+
+.gambar-info3 {
+    width: 40%;
+    height: auto; /* Change height to auto */
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+/* Media Query untuk tampilan mobile */
+@media (max-width: 768px) {
+    .info1 {
+        flex-direction: column-reverse; /* Gambar di atas teks */
+        align-items: center; /* Konten rata tengah */
+    }
+
+    .gambar-info1 {
+        width: 100%; /* Gambar memenuhi lebar layar */
+        margin-left: 0;
+    }
+
+    .text-info1 {
+        margin: 10px; /* Adjust margin for mobile */
+        text-align: center; /* Rata tengah untuk teks */
+    }
+
+    .info3 {
+        flex-direction: column; /* Ubah arah flex menjadi column */
+        align-items: center; /* Konten rata tengah */
+    }
+
+    .gambar-info3 {
+        width: 100%; /* Gambar memenuhi lebar layar */
+        margin-right: 0;
+    }
+
+    .text-info3 {
+        margin: 10px; /* Adjust margin for mobile */
+        text-align: center; /* Rata tengah untuk teks */
+    }
+}

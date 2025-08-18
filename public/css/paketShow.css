@@ -1,0 +1,127 @@
+html, body {
+    background-color: #A0D0B3;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+}
+
+.zoomimg {
+    cursor: zoom-in;
+}
+
+.paket-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #A0D0B3;
+    border-radius: 10px;
+    flex-grow: 1; /* Membuat paket-detail tumbuh agar mengisi ruang yang tersedia */
+}
+
+.kategori-wisata {
+    background-color: #A0D0B3;
+    min-height: calc(100vh - 100px); /* Sesuaikan 100px dengan tinggi footer */
+}
+
+.kategori-wisata p{
+    font-size: 20px;
+}
+
+/* Menjaga gambar agar tidak meluap */
+.paket-detail h1, .paket-detail h2 {
+    text-align: center;
+    color: #333;
+}
+
+.kategori-header h2{
+    text-align: center;
+    padding-top: 70px;
+    background-color: #A0D0B3;
+}
+
+.paket-photo {
+    display: flex; /* Mengaktifkan Flexbox */
+    flex-wrap: wrap; /* Membungkus elemen ke baris baru jika tidak cukup ruang */
+    gap: 20px; /* Jarak antar gambar lebih besar */
+    justify-content: center; /* Pusatkan gambar secara horizontal */
+    margin-bottom: 30px;
+}
+
+.paket-photo img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-list {
+    list-style: none;
+    padding: 30px;
+}
+
+.menu-list li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.like-button {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #7a0707;
+    transition: transform 0.2s;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+}
+
+#like-count {
+    font-weight: bold;
+    color: #7a0707;
+}
+
+.like-icon {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.btn-kembali {
+    font-size: medium;
+    background-color: #A0D0B3;
+    color: #254336;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 0;
+    display: inline-block;
+    margin-bottom: 20px;
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+
+/* Penyesuaian untuk ukuran layar lebih kecil */
+@media (max-width: 768px) {
+    .paket-photo img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .paket-photo img {
+        width: 100%;
+        height: auto;
+    }
+}

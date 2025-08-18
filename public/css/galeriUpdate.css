@@ -1,0 +1,35 @@
+/* Background untuk seluruh halaman */
+body {
+    background-color: #FFFBE6; /* Warna latar belakang */
+    margin: 0; /* Hapus margin */
+    padding: 20px; /* Padding untuk halaman */
+}
+
+/* Judul */
+h1 {
+    color: #557C56; /* Warna teks judul */
+}
+
+/* Kontainer untuk formulir */
+.container {
+    max-width: 600px; /* Ukuran kontainer */
+    margin: 0 auto; /* Pusatkan kontainer */
+    padding: 20px; /* Padding di dalam kontainer */
+    border-radius: 5px; /* Radius border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+/* Styling untuk tombol */
+button {
+    margin-top: 10px; /* Margin atas untuk tombol */
+}
+
+/* Efek hover untuk tombol Kembali */
+.btn-secondary:hover {
+    background-color: darkgray; /* Warna latar belakang saat hover */
+}
+
+/* Efek hover untuk tombol Simpan */
+.btn-success:hover {
+    background-color: darkgreen; /* Warna latar belakang saat hover */
+}

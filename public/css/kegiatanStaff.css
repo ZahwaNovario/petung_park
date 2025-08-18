@@ -1,0 +1,74 @@
+/* Background untuk seluruh halaman */
+body {
+    background-color: #FFFBE6;
+    font-family: Arial, sans-serif;
+}
+
+/* Container dan styling judul */
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Tabel Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Tombol "Perbarui" dan "Hapus" */
+.btn {
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Styling khusus untuk header tabel */
+.thead-dark th {
+    background-color: #557C56;
+    color: #FFFBE6;
+    font-weight: bold;
+}
+
+/* Gaya untuk gambar dalam tabel */
+table img {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Gaya untuk tombol dalam tabel */
+.table .btn {
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+/* Gaya untuk tabel yang lebih responsif */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 15px;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td:before {
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+}

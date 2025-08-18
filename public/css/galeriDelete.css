@@ -1,0 +1,14 @@
+body {
+    background-color: #FFFBE6; /* Warna latar belakang halaman */
+    margin: 0;
+    padding: 20px;
+}
+
+.galeri-details {
+    margin: 20px 0; /* Memberi jarak di atas dan bawah */
+    border: 1px solid #ccc; /* Garis batas */
+    border-radius: 5px; /* Sudut melengkung */
+    background: #f9f9f9; /* Latar belakang yang berbeda untuk detail */
+}
+
+/* Optional: Bisa menambahkan kustomisasi di sini jika perlu */

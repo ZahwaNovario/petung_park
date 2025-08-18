@@ -1,0 +1,74 @@
+/* Background untuk seluruh halaman */
+body {
+    background-color: #FFFBE6; /* Warna latar belakang halaman */
+    font-family: Arial, sans-serif; /* Font halaman */
+}
+
+/* Container dan styling judul */
+.container {
+    width: 90%;
+    margin: 0 auto; /* Mengatur margin otomatis untuk pusat */
+}
+
+/* Tabel Styling */
+table {
+    width: 100%; /* Mengatur lebar tabel */
+    border-collapse: collapse; /* Menggabungkan border tabel */
+}
+
+/* Tombol */
+.btn {
+    border-radius: 5px; /* Memberikan sudut melengkung pada tombol */
+    cursor: pointer; /* Mengubah kursor saat hover */
+}
+
+/* Styling khusus untuk header tabel */
+.thead-dark th {
+    background-color: #557C56; /* Warna latar belakang judul kolom */
+    color: #FFFBE6; /* Warna teks judul kolom */
+    font-weight: bold; /* Menebalkan teks */
+}
+
+/* Gaya untuk gambar dalam tabel */
+table img {
+    max-width: 100px; /* Membatasi lebar gambar */
+    height: auto; /* Memastikan tinggi gambar otomatis */
+}
+
+/* Gaya untuk tombol dalam tabel */
+.table .btn {
+    font-weight: bold; /* Menebalkan teks tombol */
+    padding: 5px 10px; /* Menambahkan padding pada tombol */
+}
+
+/* Gaya untuk tabel yang lebih responsif */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block; /* Membuat tabel menjadi block untuk perangkat kecil */
+    }
+    
+    thead tr {
+        position: absolute; /* Memposisikan header tabel */
+        top: -9999px; /* Menyembunyikan header tabel */
+        left: -9999px; /* Menyembunyikan header tabel */
+    }
+    
+    tr {
+        margin-bottom: 15px; /* Menambahkan margin bawah pada baris */
+    }
+
+    td {
+        text-align: right; /* Mengatur teks ke kanan */
+        padding-left: 50%; /* Memberikan padding kiri */
+        position: relative; /* Posisi relatif untuk setiap cell */
+    }
+
+    td:before {
+        position: absolute; /* Memposisikan label */
+        left: 0; /* Menempatkan di sisi kiri */
+        width: 50%; /* Lebar label */
+        padding-left: 10px; /* Padding kiri */
+        white-space: nowrap; /* Tidak membungkus teks */
+        font-weight: bold; /* Menebalkan label */
+    }
+}

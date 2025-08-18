@@ -1,0 +1,29 @@
+body {
+    background-color: #FFFBE6;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #557C56;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.btn-success {
+    font-weight: bold;
+    background-color: #557C56;
+    border-color: #557C56;
+}
+
+.btn-secondary {
+    font-weight: bold;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.text-center {
+    margin-top: 20px;
+}
