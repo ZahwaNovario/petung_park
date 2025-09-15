@@ -79,15 +79,12 @@ class RegisterController extends Controller
             return back()->withErrors(['email' => 'Email sudah digunakan.']);
         }
 
-        $user = $this->create($request->all());        
+        $user = $this->create($request->all());
 
         // Send the verification email
         event(new Registered($user));  // This triggers the sending of the verification email
 
-        // Log the user in
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME)->with('success', 'Selamat datang, registrasi berhasil! Silakan verifikasi email Anda.');
+        return redirect('login')->with('success', 'Selamat datang, registrasi berhasil! Silakan verifikasi email Anda.');
     }
 
     public function register()
