@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('beranda');
 });
 
 // Auth::routes(['verify' => true, 'reset' => true]);
@@ -76,13 +76,13 @@ Route::post('/logout', function () {
 })->name('logout');
 
 
-// Navbar 
+// Navbar
 Route::get('/beranda', [GalleryShowController::class, 'showAllPengguna'])->name('beranda');
 Route::get('/wisata', [PackageController::class, 'showLayanan'])->name('wisata');
 Route::get('/agenda', [AgendaController::class, 'showAgenda'])->name('agenda');
 Route::get('/tentangKami', [GenericController::class, 'aboutUs'])->name('tentangKami');
 
-// Agenda 
+// Agenda
 Route::get('/agenda/mendatang/{id}', [AgendaController::class, 'showMendatang'])->name('agenda.mendatang');
 Route::get('/agenda/lalu/{id}', [AgendaController::class, 'showLalu'])->name('agenda.lalu');
 
@@ -136,7 +136,7 @@ Route::middleware('auth', 'verified')->group(function () {
             Route::post('/admin/staf/{user}', [UserController::class, 'unactivate'])->name('staf.unactive');
         });
 
-        //Admin CRUD Generic 
+        //Admin CRUD Generic
         Route::get('/admin/generic', [GenericController::class, 'index'])->name('generic.index');
         Route::post('/admin/generic/create', [GenericController::class, 'store'])->name('generic.store');
         Route::get('/admin/generic/create', [GenericController::class, 'create'])->name('generic.create');
@@ -152,7 +152,7 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::post('/admin/galeri/edit/{gallery}', [GalleryController::class, 'update'])->name('galeri.update');
         Route::post('/admin/galeri/{gallery}', [GalleryController::class, 'unactive'])->name('galeri.unactive');
 
-        //Admin CRUD Galeri Show 
+        //Admin CRUD Galeri Show
         Route::get('/admin/galeri-show', [GalleryShowController::class, 'index'])->name('galeri.show.index');
         Route::post('/admin/galeri-show/create', [GalleryShowController::class, 'store'])->name('galeri.show.store');
         Route::get('/admin/galeri-show/create', [GalleryShowController::class, 'create'])->name('galeri.show.create');
@@ -160,7 +160,7 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::post('/admin/galeri-show/edit/{gallery}', [GalleryShowController::class, 'update'])->name('galeri.show.update');
         Route::post('/admin/galeri-show/{gallery}', [GalleryShowController::class, 'unactive'])->name('galeri.show.unactive');
 
-        //Admin CRUD Galeri Slider 
+        //Admin CRUD Galeri Slider
         Route::get('/admin/galeri-slider', [SliderHomeController::class, 'index'])->name('galeri.slider.index');
         Route::post('/admin/galeri-slider/create', [SliderHomeController::class, 'store'])->name('galeri.slider.store');
         Route::get('/admin/galeri-slider/create', [SliderHomeController::class, 'create'])->name('galeri.slider.create');
