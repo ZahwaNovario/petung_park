@@ -10,16 +10,15 @@
     <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
         <div class="row justify-content-center w-100">
             <div class="col-md-8">
+                {{-- @if (session('resent'))
+                    <div class="alert alert-success" role="alert">
+                        {{ __('Tautan verifikasi baru telah dikirim ke alamat email Anda.') }}
+                    </div>
+                @endif --}}
                 <div class="card">
                     <div class="card-header">{{ __('Verifikasi Alamat Email Anda') }}</div>
 
                     <div class="card-body">
-                        {{-- @if (session('cont'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('Tautan verifikasi baru telah dikirim ke alamat email Anda.') }}
-                        </div>
-                    @endif --}}
-
                         {{ __('Sebelum melanjutkan, harap periksa email Anda untuk tautan verifikasi.') }}
                         {{ __('Jika Anda tidak menerima email tersebut') }},
                         <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
@@ -36,14 +35,14 @@
 
 @section('page-js')
     <script>
-        @if (session('resent'))
+        @if (session('message'))
             Swal.fire({
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'Tautan verifikasi baru telah dikirim ke email Anda.',
+                title: @json(session('message')),
                 showConfirmButton: false,
-                timer: 5000, // auto ilang 5 detik
+                timer: 5000,
                 timerProgressBar: true,
                 showCloseButton: true
             });
