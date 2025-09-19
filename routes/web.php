@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('beranda');
 });
 
 // Auth::routes(['verify' => true, 'reset' => true]);
