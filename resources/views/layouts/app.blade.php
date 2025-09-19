@@ -13,6 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .navbar-brand {
             display: flex;
@@ -78,7 +79,7 @@
                                 <span class="nav-link text-white">Hi, {{ Auth::user()->name }}!</span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" 
+                                <a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -103,5 +104,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('page-js')
 </body>
 </html>
