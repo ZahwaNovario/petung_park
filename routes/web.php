@@ -16,6 +16,10 @@ use App\Http\Controllers\TravelController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SceneController;
+use App\Http\Controllers\TourController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -222,5 +226,39 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::get('/admin/artikel/galeri/create', [ArticleController::class, 'createArticleGallery'])->name('artikel.galeri.create');
         Route::post('/admin/artikel/galeri/create', [ArticleController::class, 'storeArticleGallery'])->name('artikel.galeri.store');
         Route::post('/admin/artikel/galeri/{artikel}', [ArticleController::class, 'unactiveArticleGallery'])->name('artikel.galeri.unactive');
+
+        //Admin virtual tour
+        Route::prefix('admin')->group(function () {
+            // Routes untuk Location
+            Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+            Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
+            Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+            Route::get('/locations/{id}/edit', [LocationController::class, 'edit'])->name('locations.edit');
+            Route::put('/locations/{id}', [LocationController::class, 'update'])->name('locations.update');
+            Route::delete('/locations/{id}', [LocationController::class, 'destroy'])->name('locations.destroy');
+
+            // Routes untuk Scene
+            Route::get('/scenes', [SceneController::class, 'index'])->name('scenes.index');
+            Route::get('/scenes/create', [SceneController::class, 'create'])->name('scenes.create');
+            Route::post('/scenes', [SceneController::class, 'store'])->name('scenes.store');
+            Route::get('/scenes/{scene}/edit', [SceneController::class, 'edit'])->name('scenes.edit');
+            Route::put('/scenes/{scene}', [SceneController::class, 'update'])->name('scenes.update');
+            Route::delete('/scenes/{scene}', [SceneController::class, 'destroy'])->name('scenes.destroy');
+        });
     });
 });
+
+Route::post('/connections', [ConnectionController::class, 'store'])->name('connections.store');
+Route::delete('/connections/{id}', [ConnectionController::class, 'destroy'])->name('connections.destroy');
+
+
+Route::get('/location/{slug}', [TourController::class, 'showLocation'])->name('location.show');
+
+// Route::get('/scene/create', [SceneController::class, 'create'])->name('scene.create');
+
+Route::get('/scene/{id}', [TourController::class, 'showScene'])->name('scene.show');
+
+// Route::get('/admin/scenes/create', [SceneController::class, 'create'])->name('scenes.create');
+// Route::post('/admin/scenes', [SceneController::class, 'store'])->name('scenes.store');
+
+// Route::post('/scene/store', [SceneController::class, 'store'])->name('scene.store');

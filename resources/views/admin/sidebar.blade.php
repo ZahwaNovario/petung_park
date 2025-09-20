@@ -93,5 +93,20 @@
                 <a class="btn btn-warning btn-block my-1 {{ request()->routeIs('generic.index') ? 'active' : '' }}" href="{{ route('generic.index') }}">Generic</a>
             </div>
         </div>
+
+        {{-- Virtual Tour --}}
+        <div class="mb-2">
+            <h6 class="d-flex justify-content-between align-items-center"
+                data-toggle="collapse" data-target="#virtualCollapse"
+                aria-expanded="false" aria-controls="virtualCollapse"
+                style="cursor:pointer; color:#295A3F;">
+                Virtual Tour
+                <span class="ml-2">&#9662;</span>
+            </h6>
+            <div id="virtualCollapse" class="collapse" data-parent="#accordionSidebar">
+                <a class="btn btn-warning btn-block my-1 {{ request()->routeIs('locations.index') ? 'active' : '' }}" href="{{ route('locations.index') }}">Locations</a>
+                <a class="btn btn-warning btn-block my-1 {{ request()->routeIs('scenes.index') ? 'active' : '' }}" href="{{ route('scenes.index') }}">Scenes</a>
+            </div>
+        </div>
     </div>
 </div>

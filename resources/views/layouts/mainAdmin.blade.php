@@ -89,9 +89,6 @@
                         <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">{{ session('success') }}</div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +100,14 @@
         $(document).ready(function() {
             @if (session('success'))
                 $('#BerhasilModal').modal('show');
+
+                // Auto-close setelah 2 detik:
+                setTimeout(function() {
+                    $('#BerhasilModal').modal('hide');
+                    // Opsional: redirect setelah close
+                    // window.location = "{{ url()->current() }}"; // reload
+                    // window.location = "{{ route('locations.index') }}"; // ke index lokasi
+                }, 2000);
             @endif
         });
     </script>

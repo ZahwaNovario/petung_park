@@ -45,21 +45,22 @@ class GalleryController extends Controller
                 'photo.max' => 'Ukuran file tidak boleh lebih dari 10 MB.',
                 'description.max' => 'Deskripsi tidak boleh lebih dari 255 karakter.',
             ]);
-        
+
             $gallery = new Gallery;
             $gallery->name = $request->input('name');
             $gallery->description = $request->input('description');
             $gallery->status = 1;
             $gallery->number_love = 0;
             $extension = $request->file('photo')->getClientOriginalExtension();
-            
+
             $newFileName = str_replace(' ', '_', strtolower($gallery->name)) . '_' . time() . '.' . $extension;
-            
-            $filePath = $request->file('photo')->storeAs('images/galeri/baru', $newFileName, 'public');
-            
-            $gallery->photo_link = 'storage/images/galeri/baru/' . $newFileName; // Save as relative URL   
+
+            $request->file('photo')->move(public_path('images/galeri/baru'), $newFileName);
+
+            $gallery->photo_link = 'images/galeri/baru/' . $newFileName;
+
             $gallery->save();
-        
+
             return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->route('galeri.index')->with('error', 'Terjadi kesalahan saat menambahkan galeri: ' . $e->getMessage());
@@ -136,12 +137,12 @@ class GalleryController extends Controller
                 $gallery->status = 0;
                 $gallery->updated_at = now();
                 $gallery->save();
-                });
-                $message = 'Galeri berhasil dinonaktifkan.';
-                return redirect()->route('galeri.index')->with('success', $message);
-         } catch (\Exception $e) {
-                return redirect()->route('galeri.index')->with('error', 'Terjadi kesalahan saat menonaktifkan galeri: ' . $e->getMessage());
-         }
+            });
+            $message = 'Galeri berhasil dinonaktifkan.';
+            return redirect()->route('galeri.index')->with('success', $message);
+        } catch (\Exception $e) {
+            return redirect()->route('galeri.index')->with('error', 'Terjadi kesalahan saat menonaktifkan galeri: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -167,12 +168,12 @@ class GalleryController extends Controller
             }
 
             session()->forget($sessionKey);
-            $action = 'unliked'; 
+            $action = 'unliked';
         } else {
             $gallery->number_love++;
 
             session()->put($sessionKey, true);
-            $action = 'liked'; 
+            $action = 'liked';
         }
 
         $gallery->save();
@@ -182,6 +183,4 @@ class GalleryController extends Controller
             'action' => $action,
         ]);
     }
-
 }
-
