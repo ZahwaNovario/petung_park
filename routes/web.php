@@ -16,6 +16,10 @@ use App\Http\Controllers\TravelController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SceneController;
+use App\Http\Controllers\TourController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -32,7 +36,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('beranda');
 });
 
 // Auth::routes(['verify' => true, 'reset' => true]);
@@ -76,13 +80,13 @@ Route::post('/logout', function () {
 })->name('logout');
 
 
-// Navbar 
+// Navbar
 Route::get('/beranda', [GalleryShowController::class, 'showAllPengguna'])->name('beranda');
 Route::get('/wisata', [PackageController::class, 'showLayanan'])->name('wisata');
 Route::get('/agenda', [AgendaController::class, 'showAgenda'])->name('agenda');
 Route::get('/tentangKami', [GenericController::class, 'aboutUs'])->name('tentangKami');
 
-// Agenda 
+// Agenda
 Route::get('/agenda/mendatang/{id}', [AgendaController::class, 'showMendatang'])->name('agenda.mendatang');
 Route::get('/agenda/lalu/{id}', [AgendaController::class, 'showLalu'])->name('agenda.lalu');
 
@@ -136,7 +140,7 @@ Route::middleware('auth', 'verified')->group(function () {
             Route::post('/admin/staf/{user}', [UserController::class, 'unactivate'])->name('staf.unactive');
         });
 
-        //Admin CRUD Generic 
+        //Admin CRUD Generic
         Route::get('/admin/generic', [GenericController::class, 'index'])->name('generic.index');
         Route::post('/admin/generic/create', [GenericController::class, 'store'])->name('generic.store');
         Route::get('/admin/generic/create', [GenericController::class, 'create'])->name('generic.create');
@@ -152,7 +156,7 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::post('/admin/galeri/edit/{gallery}', [GalleryController::class, 'update'])->name('galeri.update');
         Route::post('/admin/galeri/{gallery}', [GalleryController::class, 'unactive'])->name('galeri.unactive');
 
-        //Admin CRUD Galeri Show 
+        //Admin CRUD Galeri Show
         Route::get('/admin/galeri-show', [GalleryShowController::class, 'index'])->name('galeri.show.index');
         Route::post('/admin/galeri-show/create', [GalleryShowController::class, 'store'])->name('galeri.show.store');
         Route::get('/admin/galeri-show/create', [GalleryShowController::class, 'create'])->name('galeri.show.create');
@@ -160,7 +164,7 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::post('/admin/galeri-show/edit/{gallery}', [GalleryShowController::class, 'update'])->name('galeri.show.update');
         Route::post('/admin/galeri-show/{gallery}', [GalleryShowController::class, 'unactive'])->name('galeri.show.unactive');
 
-        //Admin CRUD Galeri Slider 
+        //Admin CRUD Galeri Slider
         Route::get('/admin/galeri-slider', [SliderHomeController::class, 'index'])->name('galeri.slider.index');
         Route::post('/admin/galeri-slider/create', [SliderHomeController::class, 'store'])->name('galeri.slider.store');
         Route::get('/admin/galeri-slider/create', [SliderHomeController::class, 'create'])->name('galeri.slider.create');
@@ -222,5 +226,40 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::get('/admin/artikel/galeri/create', [ArticleController::class, 'createArticleGallery'])->name('artikel.galeri.create');
         Route::post('/admin/artikel/galeri/create', [ArticleController::class, 'storeArticleGallery'])->name('artikel.galeri.store');
         Route::post('/admin/artikel/galeri/{artikel}', [ArticleController::class, 'unactiveArticleGallery'])->name('artikel.galeri.unactive');
+
+        //Admin virtual tour
+        Route::prefix('admin')->group(function () {
+            // Routes untuk Location
+            Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+            Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
+            Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+            Route::get('/locations/{id}/edit', [LocationController::class, 'edit'])->name('locations.edit');
+            Route::put('/locations/{id}', [LocationController::class, 'update'])->name('locations.update');
+            Route::delete('/locations/{id}', [LocationController::class, 'destroy'])->name('locations.destroy');
+
+            // Routes untuk Scene
+            Route::get('/scenes', [SceneController::class, 'index'])->name('scenes.index');
+            Route::get('/scenes/create', [SceneController::class, 'create'])->name('scenes.create');
+            Route::post('/scenes', [SceneController::class, 'store'])->name('scenes.store');
+            Route::get('/scenes/{scene}/edit', [SceneController::class, 'edit'])->name('scenes.edit');
+            Route::put('/scenes/{scene}', [SceneController::class, 'update'])->name('scenes.update');
+            Route::delete('/scenes/{scene}', [SceneController::class, 'destroy'])->name('scenes.destroy');
+        });
     });
 });
+
+Route::post('/connections', [ConnectionController::class, 'store'])->name('connections.store');
+Route::delete('/connections/{id}', [ConnectionController::class, 'destroy'])->name('connections.destroy');
+
+
+Route::get('/location/{slug}', [TourController::class, 'showLocation'])->name('location.show');
+Route::get('/virtual-tour/home',[TourController::class,'index'])->name('virtualtour.index');
+
+// Route::get('/scene/create', [SceneController::class, 'create'])->name('scene.create');
+
+Route::get('/virtual-tour/show-scene/{id}', [TourController::class, 'showScene'])->name('scene.show');
+
+// Route::get('/admin/scenes/create', [SceneController::class, 'create'])->name('scenes.create');
+// Route::post('/admin/scenes', [SceneController::class, 'store'])->name('scenes.store');
+
+// Route::post('/scene/store', [SceneController::class, 'store'])->name('scene.store');

@@ -59,7 +59,7 @@ class UserController extends Controller
             ]);
             if (User::where('email', $request->input('email'))->exists()) {
                 return redirect()->back()->withInput()->with('error', 'Email sudah digunakan.');
-            }            
+            }
             $staff = [
                 'name' => $request->input('name'),
                 'status' => 1,
@@ -74,7 +74,7 @@ class UserController extends Controller
             if ($request->has('photo')) {
                 $staff['gallery_id'] = $request->input('photo');
             }
-    
+
             $user = new User($staff);
             $user->save();
 
@@ -89,7 +89,7 @@ class UserController extends Controller
      */
     public function showAdminPage()
     {
-        return view('admin.index');
+        return view('layouts.mainAdmin');
     }
 
     /**
@@ -107,7 +107,7 @@ class UserController extends Controller
                             ->get();
         return view('staf.edit', compact('staff', 'galleries'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
@@ -182,7 +182,7 @@ class UserController extends Controller
                    $staff->updated_at = now();
                 $staff->save();
             });
-   
+
                 return redirect()->route('staf.index')->with('success', 'Staf berhasil dinonaktifkan!');
             } catch (\Exception $e) {
                 return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menonaktifkan staf: ' . $e->getMessage());

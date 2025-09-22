@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,17 +38,19 @@ class LoginController extends Controller
     public function login_process(Request $request)
     {
         // Validate input
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8'],
-        ],
-        [
-            'email.unique' => 'Email sudah terdaftar.',
-            'email.required' => 'Email harus diisi.',
-            'password.required' => 'Kata sandi harus diisi.',
-            'password.min' => 'Kata sandi harus terdiri dari minimal 8 karakter.',
-            'password.confirmed' => 'Kata sandi tidak sama dengan konfirmasi kata sandi.',
-        ]);
+        $request->validate(
+            [
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:8'],
+            ],
+            [
+                'email.unique' => 'Email sudah terdaftar.',
+                'email.required' => 'Email harus diisi.',
+                'password.required' => 'Kata sandi harus diisi.',
+                'password.min' => 'Kata sandi harus terdiri dari minimal 8 karakter.',
+                'password.confirmed' => 'Kata sandi tidak sama dengan konfirmasi kata sandi.',
+            ]
+        );
 
         // Check if the email exists in the database
         if (!User::where('email', $request->input('email'))->exists()) {
@@ -55,14 +59,14 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember'); // Check if "remember" is checked
-        
+
         $user = User::where('email', $request->input('email'))->first();
-        
+
         // Check if the user's account is disabled
         if ($user && $user->status == 0) {
             return redirect()->back()->withErrors(['email' => 'Akun Anda telah dinonaktifkan.'])->withInput();
         }
-        
+
         // Attempt to authenticate the user
         if (Auth::attempt($credentials, $remember)) {
             // Handle "remember me" logic
@@ -73,10 +77,15 @@ class LoginController extends Controller
                     $user->save();
                 }
             }
-            
+
             // Redirect based on user role
             if (Auth::user()->position === 'Admin' || Auth::user()->position === 'Staff') {
                 return redirect()->route('admin.index');
+            }
+
+            if (!$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice')
+                    ->with('warning', 'Silakan verifikasi email Anda.');
             }
 
             return redirect()->intended('/beranda')->with('Berhasil', 'Login Sukses!');

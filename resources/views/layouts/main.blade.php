@@ -9,6 +9,7 @@
     <link rel="icon" href="/images/footer/logoPetungPark.png" type="image/x-icon">
     <!-- Link Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('page-css')
 </head>
 <body>
