@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             // Kalau nggak ada di current JSON → berarti beda lokasi → reload ke scene.show
-            window.location.href = `/scene/${id}`;
+            window.location.href = `/virtual-tour/show-scene/${id}`;
         }
     }
     // Ambil scene id yang aktif dari Blade
