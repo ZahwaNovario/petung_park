@@ -33,23 +33,24 @@
         </div>
     </section>
     <!-- Section Reservasi -->
-    <section class="position-relative text-white py-5"
-        style="background: url('{{ asset('images/galeri/pemandangan/gazeboKecek.JPG') }}') center/cover no-repeat;">
-        <div class="overlay position-absolute w-100 h-100" style="top:0; left:0; background: rgba(41,90,63,0.7);"></div>
 
-        <div class="container position-relative">
-            <h2 class="title-beranda text-center mb-5 text-warning">Reservasi</h2>
+    <!-- <section class="position-relative text-white py-5"
+                {{-- style="background: url('{{ asset('images/galeri/pemandangan/gazeboKecek.JPG') }}') center/cover no-repeat;"> --}}
+                <div class="overlay position-absolute w-100 h-100" style="top:0; left:0; background: rgba(41,90,63,0.7);"></div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card shadow-lg border-0 rounded-3 text-center p-5" style="background:#fff; color:#295A3F;">
-                        <h3 class="fw-bold mb-3">Pesan Spot Favoritmu 🎯</h3>
-                        <p class="mb-4" style="font-size: 15px;">
-                            Dapatkan pengalaman terbaik dengan melakukan reservasi meja atau spot pilihan Anda terlebih
-                            dahulu.
-                        </p>
+                <div class="container position-relative">
+                    <h2 class="title-beranda text-center mb-5 text-warning">Reservasi</h2>
 
-                        {{-- @guest
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card shadow-lg border-0 rounded-3 text-center p-5" style="background:#fff; color:#295A3F;">
+                                <h3 class="fw-bold mb-3">Pesan Spot Favoritmu 🎯</h3>
+                                <p class="mb-4" style="font-size: 15px;">
+                                    Dapatkan pengalaman terbaik dengan melakukan reservasi meja atau spot pilihan Anda terlebih
+                                    dahulu.
+                                </p>
+
+                                {{-- @guest
                             <a href="{{ route('login') }}" class="btn btn-lg btn-success px-5 py-3 shadow-sm rounded-pill">
                                 Login untuk Reservasi
                             </a>
@@ -65,15 +66,14 @@
                                 </a>
                             @endif
                         @endguest --}}
-                        <button id="btn-reservasi" class="btn btn-success">
-                            Reservasi Sekarang
-                        </button>
+                                <button id="btn-reservasi" class="btn btn-success">
+                                    Reservasi Sekarang
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
+            </section> -->
 
     <!-- Section Virtual Tour -->
     <section class="bg-dark text-white py-5">
@@ -91,7 +91,7 @@
             </div>
 
             <div class="text-center mt-3">
-                <a href="" class="btn btn-warning">Show More</a>
+                <a href="{{ route('scene.show', 1) }}" class="btn btn-warning">Show More</a>
             </div>
         </div>
     </section>
@@ -169,7 +169,7 @@
 
 
 @section('page-js')
-    <script>
+    {{-- <script>
         document.getElementById('btn-reservasi').addEventListener('click', function() {
             @guest
             // belum login
@@ -207,7 +207,7 @@
             @endif
         @endguest
         });
-    </script>
+    </script> --}}
 @endsection
 
 

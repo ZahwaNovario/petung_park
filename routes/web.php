@@ -253,10 +253,11 @@ Route::delete('/connections/{id}', [ConnectionController::class, 'destroy'])->na
 
 
 Route::get('/location/{slug}', [TourController::class, 'showLocation'])->name('location.show');
+Route::get('/virtual-tour/home',[TourController::class,'index'])->name('virtualtour.index');
 
 // Route::get('/scene/create', [SceneController::class, 'create'])->name('scene.create');
 
-Route::get('/scene/{id}', [TourController::class, 'showScene'])->name('scene.show');
+Route::get('/virtual-tour/show-scene/{id}', [TourController::class, 'showScene'])->name('scene.show');
 
 // Route::get('/admin/scenes/create', [SceneController::class, 'create'])->name('scenes.create');
 // Route::post('/admin/scenes', [SceneController::class, 'store'])->name('scenes.store');

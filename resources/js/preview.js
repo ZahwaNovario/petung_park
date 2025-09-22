@@ -24,15 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         scene = viewer.createScene({ source, geometry, view, pinFirstLevel: true });
         scene.switchTo();
 
-        viewer.updateSize();
-        requestAnimationFrame(() => viewer.updateSize()); // jaga-jaga setelah layout settle
-
-        // update kalau ukuran container berubah
-        window.addEventListener("resize", () => viewer.updateSize());
-
-        // atau lebih presisi:
-        new ResizeObserver(() => viewer.updateSize()).observe(panoEl);
-
         // render existing connections
         connections = (window.existingConnections || []).map(conn => {
             const el = document.createElement("div");
@@ -80,8 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         scenes.push({ name: sceneName, scene });
 
         scene.switchTo();
-        viewer.updateSize();
-        requestAnimationFrame(() => viewer.updateSize());
         connections = [];
         renderList();
     });

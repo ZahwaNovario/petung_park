@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -71,8 +72,23 @@ class SceneController extends Controller
         $allScenes = Scene::all();
         $connections = Connection::where('scene_from', $scene->id)->get();
 
-        return view('admin.virtualtouradmin.scenes.edit', compact('scene', 'locations', 'allScenes', 'connections'));
+        // Ubah jadi plain array supaya aman buat @json
+        $existingConnections = $connections->map(function ($c) {
+            return [
+                'yaw' => (float) $c->yaw,
+                'pitch' => (float) $c->pitch,
+                'target' => (string) $c->scene_to,
+            ];
+        })->values()->toArray();
+
+        return view('admin.virtualtouradmin.scenes.edit', compact(
+            'scene',
+            'locations',
+            'allScenes',
+            'existingConnections'
+        ));
     }
+
 
 
     public function update(Request $request, Scene $scene)

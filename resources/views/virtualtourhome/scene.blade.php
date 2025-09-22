@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>{{ $scene->name }} - {{ $scene->location->name }}</title>
     @vite(['resources/css/app.css', 'resources/css/tour.css', 'resources/js/app.js'])
-    
+
 </head>
+
 <body>
     <!-- Tombol back -->
     <a href="{{ url('/') }}" class="back-btn">← Kembali</a>
@@ -22,25 +24,33 @@
         </div>
     </div>
 
+
+
     {{-- JSON data untuk JS --}}
     <script id="scene-data" type="application/json">
-        {!! json_encode(
-            $scene->location->scenes->map(function ($s) {
+{!! json_encode([
+    'activeSceneId' => $scene->id,
+    'scenes' => $scene->location->scenes->map(function ($s) {
+        return [
+            'id' => $s->id,
+            'name' => $s->name,
+            'caption' => "Ini adalah {$s->name}.",
+            'imagePath' => asset($s->image_path),
+            'locationSlug' => $s->location->slug,
+            'hotspots' => $s->connections->map(function ($c) {
                 return [
-                    'id' => $s->id,
-                    'name' => $s->name,
-                    'caption' => "Ini adalah {$s->name}.",
-                    'imagePath' => asset($s->image_path),
-                    'hotspots' => $s->connections->map(function ($c) {
-                        return [
-                            'yaw' => $c->yaw,
-                            'pitch' => $c->pitch,
-                            'targetScene' => $c->scene_to
-                        ];
-                    })
+                    'yaw' => $c->yaw,
+                    'pitch' => $c->pitch,
+                    'targetScene' => $c->scene_to
                 ];
             })
-        ) !!}
-    </script>
+        ];
+    })
+]) !!}
+</script>
+
+
+
 </body>
+
 </html>

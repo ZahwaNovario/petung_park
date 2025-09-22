@@ -31,7 +31,7 @@ class TourController extends Controller
     public function showScene($id)
     {
         $scene = Scene::with(['location', 'connections.sceneTo'])->findOrFail($id);
-        return view('scene', compact('scene'));
+        return view('virtualtourhome.scene', compact('scene'));
     }
 
     public function preview()

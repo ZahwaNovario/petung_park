@@ -77,17 +77,11 @@
 
 @section('page-js')
     <script>
-        // data lama
         window.currentScene = @json($scene);
         window.allScenes = @json($allScenes);
-        window.existingConnections = @json(
-            $connections->map(function ($c) {
-                return [
-                    'yaw' => $c->yaw,
-                    'pitch' => $c->pitch,
-                    'target' => (string) $c->scene_to, // pastikan string
-                ];
-            });
+        window.existingConnections = @json($existingConnections ?? []);
     </script>
-    <!-- @vite(['resources/js/app.js']) -->
+{{--
+    <script src="{{ asset('js/preview.js') }}" defer></script>
+    <!-- @vite(['resources/js/app.js']) --> --}}
 @endsection
