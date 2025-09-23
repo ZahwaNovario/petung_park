@@ -4,9 +4,19 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/css/tour.css": {
+    "file": "assets/tour-4ecbc8d1.css",
+    "isEntry": true,
+    "src": "resources/css/tour.css"
+  },
   "resources/js/app.js": {
     "file": "assets/app-7edcda64.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-27abf3b7.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
   }
 }
