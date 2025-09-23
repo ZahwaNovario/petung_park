@@ -19,18 +19,17 @@ return new class extends Migration
             $table->double('price', 15, 2);
             $table->tinyinteger('status')->default(0);
             $table->tinyinteger('status_recommended')->default(0);
-            $table->integer('number_love')->nullable();
             $table->timestamps();
-            
+
             $table->string('staff_email');
 
             $table->index('staff_email');
 
             $table->foreign('staff_email', 'menus_staff_email_foreign')
-                ->references('email')->on('staffs')->onDelete('cascade');            
+                ->references('email')->on('staffs')->onDelete('cascade');
             $table->unsignedBigInteger('gallery_id');
             $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
-           
+
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
@@ -47,8 +46,8 @@ return new class extends Migration
                 $foreignKeyName = DB::select(
                     "SELECT CONSTRAINT_NAME
                      FROM information_schema.KEY_COLUMN_USAGE
-                     WHERE TABLE_NAME = 'menus' 
-                     AND TABLE_SCHEMA = '" . env('DB_DATABASE') . "' 
+                     WHERE TABLE_NAME = 'menus'
+                     AND TABLE_SCHEMA = '" . env('DB_DATABASE') . "'
                      AND COLUMN_NAME = 'staff_email'"
                 );
 

@@ -37,4 +37,9 @@ class Menu extends Model
     {
         return $this->belongsToMany(Package::class, 'package_menus', 'menu_id', 'package_id');
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'menu_likes')->withTimestamps();
+    }
 }
