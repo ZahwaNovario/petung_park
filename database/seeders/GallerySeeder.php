@@ -336,7 +336,15 @@ class GallerySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            
+            [
+                'name' => 'Menu Default',
+                'photo_link' => $makanan . 'menu.jpg',
+                'description' => 'Foto Menu Default',
+                'status' => 1,
+                'number_love' => $faker->numberBetween(0, 20),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // [
             //     'name' => 'Pelatihan Ekowisata',
             //     'photo_link' => $pemandangan . 'pelatihanekowisata.jpg',
@@ -346,7 +354,7 @@ class GallerySeeder extends Seeder
             //     'created_at' => now(),
             //     'updated_at' => now(),
             // ],
-            
+
         ]);
     }
 }
