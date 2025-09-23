@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const captionEl = document.getElementById('caption');
     if (!panoEl) return;
 
+    // Ambil data dari atribut HTML yang di-pass Blade
     const parsedData = JSON.parse(document.getElementById('scene-data').textContent);
     const currentSceneId = parsedData.activeSceneId;
     const sceneDataList = parsedData.scenes;
@@ -12,36 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewer = new Marzipano.Viewer(panoEl);
     const marzipanoScenes = {};
 
-    // Kalau tidak ada scene sama sekali → tampilkan placeholder
-    if (sceneDataList.length === 0) {
-        panoEl.innerHTML = `
-                <div style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    height:100%;
-                    width:100%;
-                    background:#333;
-                    color:#fff;
-                    font-size:24px;
-                    font-weight:600;
-                    text-align:center;
-                ">
-                    Virtual Tour Coming Soon
-                </div>
-            `;
-        return;
-    }
-
-
     // Buat semua scene dari data database
     sceneDataList.forEach(sceneData => {
-        // Gunakan placeholder jika imagePath kosong/null
-        const imagePath = sceneData.imagePath && sceneData.imagePath.trim() !== ""
-            ? sceneData.imagePath
-            : "https://via.placeholder.com/1000x563?text=Virtual+Tour+Coming+Soon";
-
-        const source = Marzipano.ImageUrlSource.fromString(imagePath);
+        const source = Marzipano.ImageUrlSource.fromString(sceneData.imagePath);
         const geometry = new Marzipano.EquirectGeometry([{ width: 3000 }]);
         const limiter = Marzipano.RectilinearView.limit.traditional(50000, 100 * Math.PI / 180);
         const view = new Marzipano.RectilinearView(null, limiter);
@@ -54,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Tambah hotspot
-        (sceneData.hotspots || []).forEach(hs => {
+        sceneData.hotspots.forEach(hs => {
             const el = document.createElement('div');
             el.classList.add('hotspot-arrow');
             el.innerHTML = "⮝";
@@ -69,21 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function switchScene(id) {
         if (marzipanoScenes[id]) {
+            // Kalau scene target masih dalam lokasi ini → langsung switch
             marzipanoScenes[id].scene.switchTo();
             if (captionEl) {
                 captionEl.textContent = marzipanoScenes[id].caption || "";
             }
         } else {
-            window.location.href = `/virtual-tour/show-scene/${id}`;
+            // Kalau nggak ada di current JSON → berarti beda lokasi → reload ke scene.show
+            window.location.href = `/scene/${id}`;
         }
     }
+    // Ambil scene id yang aktif dari Blade
 
-    // Set scene awal
+
+    // Set scene awal pakai id dari route, bukan [0]
+    // Set scene awal pakai id dari route
     if (marzipanoScenes[currentSceneId]) {
         switchScene(currentSceneId);
     } else if (sceneDataList.length > 0) {
         switchScene(sceneDataList[0].id);
     }
+
+
 
     // Klik panel
     document.querySelectorAll('#panel button').forEach(btn => {

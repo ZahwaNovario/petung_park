@@ -30,22 +30,7 @@ class TourController extends Controller
     // Halaman Scene Viewer
     public function showScene($id)
     {
-        $scene = Scene::with(['location', 'connections.sceneTo'])->find($id);
-
-        if (!$scene) {
-            // bikin scene dummy untuk placeholder
-            $scene = new \stdClass();
-            $scene->id = 0;
-            $scene->name = "Coming Soon";
-            $scene->image_path = null;
-            $scene->location = (object) [
-                'name' => "Virtual Tour",
-                'slug' => "virtual-tour",
-                'scenes' => collect([])
-            ];
-            $scene->connections = collect([]);
-        }
-
+        $scene = Scene::with(['location', 'connections.sceneTo'])->findOrFail($id);
         return view('virtualtourhome.scene', compact('scene'));
     }
 

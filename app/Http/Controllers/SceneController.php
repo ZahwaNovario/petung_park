@@ -32,7 +32,7 @@ class SceneController extends Controller
 
         $location = Location::findOrFail($request->location_id);
         $locationName = strtolower(str_replace(' ', '_', $location->name));
-        $folder = 'images/virtual-tour/' . $locationName;
+        $folder = 'images/' . $locationName;
 
         $fileName = strtolower(str_replace(' ', '_', $request->name)) . '.' .
             $request->file('image')->getClientOriginalExtension();

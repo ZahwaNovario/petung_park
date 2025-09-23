@@ -1,141 +1,81 @@
 @extends('layouts.main')
-
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('/css/hidangan.css') }}">
 @endsection
 
 @section('container-main')
-    @php
-        $liked = auth()->check() && $menu->likes->contains(auth()->id());
-        $likeCount = $menu->likes->count();
-    @endphp
-
+    <!-- Kategori Makanan -->
     <div class="kategori-makanan">
         <div class="kategori-header">
             <a href="{{ route('kategori.makanan', $menu->category->id) }}" class="btn-kembali">Kembali</a>
         </div>
-
         <div class="hidangan-container">
-            <img id="img-{{ $menu->id }}"
-                src="{{ asset($menu->gallery->photo_link ?? 'https://via.placeholder.com/300x300') }}" alt="hidangan"
-                class="zoomimg hidangan-gambar">
-
+            <img id="{{$menu->id}}" src="{{ asset($menu->gallery->photo_link ?? 'https://via.placeholder.com/300x300') }}" alt="hidangan" class="zoomimg hidangan-gambar">
             <div class="hidangan-detail">
-                <h3 id="text_{{ $menu->id }}">{{ $menu->name }}</h3>
-
+                <h3 id="text_{{$menu->id}}">{{ $menu->name }}</h3>
                 <p class="desc">{{ $menu->description }}</p>
-
-                <p class="harga">
-                    Harga:
-                    @if ($menu->price == 0)
-                        -
-                    @else
-                        Rp. {{ number_format($menu->price, 0, ',', '.') }}
+                <p class="harga">Harga: Rp. {{ number_format($menu->price, 0, ',', '.') }}</p>
+                <p class="rekomendasi">
+                    @if($menu->status_recommended == 1)
+                        <div class="rekomendasi-container">
+                            <img src="{{ asset('/images/beranda/logo/rekomen.png') }}" alt="Rekomendasi" class="rekomendasi-logo">
+                            <i>Rekomendasi</i></div>
                     @endif
                 </p>
-
-                @if ($menu->status_recommended == 1)
-                    <div class="rekomendasi-container">
-                        <img src="{{ asset('/images/beranda/logo/rekomen.png') }}" alt="Rekomendasi"
-                            class="rekomendasi-logo">
-                        <i>Rekomendasi</i>
-                    </div>
-                @endif
-
                 <div class="like-container">
-                    <button type="button" class="like-button {{ $liked ? 'liked' : '' }}"
-                        data-menu-id="{{ $menu->id }}" data-liked="{{ $liked ? '1' : '0' }}"
-                        aria-label="Suka menu ini">
-                        <span class="like-icon">{{ $liked ? '♥' : '♡' }}</span>
+                    <button class="like-button" data-menu-id="{{ $menu->id }}">
+                        ❤️
                     </button>
-                    <span id="like-count-{{ $menu->id }}" class="like-count">{{ $likeCount }}</span>
+                    <span id="like-count" class="like-count {{ $menu->number_love % 2 === 0 ? 'even' : 'odd' }}">{{ $menu->number_love }}</span>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
 @include('layouts.modalimg')
-
 @section('page-js')
-    {{-- SweetAlert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hindari binding ganda
-            document.querySelectorAll('.like-button').forEach(btn => {
-                if (btn.dataset.bound === '1') return; // sudah di-bind
-                btn.dataset.bound = '1';
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButtons = document.querySelectorAll('.like-button');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Ambil elemen 'like-count' yang tepat
+                    const likeCount = button.parentElement.querySelector('.like-count');
+                    let currentLikes = parseInt(likeCount.textContent);
+                    const menuId = button.dataset.menuId;
 
-                btn.addEventListener('click', async () => {
-                    const menuId = btn.dataset.menuId;
-                    const countEl = document.getElementById(`like-count-${menuId}`);
-
-                    try {
-                        const res = await fetch(`/hidangan/${menuId}/like`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json', // << penting: paksa 401 JSON, bukan redirect
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            credentials: 'same-origin' // bawa cookie sesi
-                        });
-
-                        // Jika route masih di-group auth, Laravel bisa redirect (302) ke /login.
-                        // Tangani agar tidak lanjut parsing JSON.
-                        if (res.redirected || (res.url && res.url.includes('/login'))) {
-                            showLoginOnce();
-                            return;
-                        }
-
-                        if (!res.ok) {
-                            if (res.status === 401) {
-                                showLoginOnce();
-                            }
-                            return;
-                        }
-
-                        const data = await res.json();
-
-                        // Update angka
-                        if (countEl && typeof data.number_love !== 'undefined') {
-                            countEl.textContent = data.number_love;
-                        }
-
-                        // Toggle ikon ♥ / ♡
-                        const icon = btn.querySelector('.like-icon');
-                        if (data.status === 'liked') {
-                            btn.classList.add('liked');
-                            btn.dataset.liked = '1';
-                            if (icon) icon.textContent = '♥';
-                        } else {
-                            btn.classList.remove('liked');
-                            btn.dataset.liked = '0';
-                            if (icon) icon.textContent = '♡';
-                        }
-                    } catch (e) {
-                        console.error('Like error:', e);
-                    }
+                    // Kirim request untuk toggle like di backend
+                    fetch(`/hidangan/${menuId}/like`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        likeCount.textContent = data.number_love; // Perbarui jumlah like
+                        updateLikeCountDisplay(likeCount); // Perbarui style (odd/even class)
+                    })
+                    .catch(error => {
+                        console.error("Error updating like:", error);
+                    });
                 });
             });
 
-            let loginAlertShown = false;
-
-            function showLoginOnce() {
-                if (loginAlertShown) return;
-                loginAlertShown = true;
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Login Diperlukan',
-                    text: 'Silakan login dulu untuk menyukai menu ini.',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    loginAlertShown = false;
-                });
+            // Update tampilan jumlah like berdasarkan odd/even
+            function updateLikeCountDisplay(likeCount) {
+                const count = parseInt(likeCount.textContent);
+                if (count % 2 === 0) {
+                    likeCount.classList.remove('odd');
+                    likeCount.classList.add('even');
+                } else {
+                    likeCount.classList.remove('even');
+                    likeCount.classList.add('odd');
+                }
             }
         });
-    </script>
 
+    </script>
     <script src="{{ asset('/js/imagemodal.js') }}"></script>
 @endsection

@@ -16,7 +16,6 @@ body {
     color: white;
     padding: 15px;
     box-sizing: border-box;
-    padding-top: 70px;
 }
 
 #panel h3 {
@@ -48,12 +47,9 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
 #pano {
-    position: relative;
-    overflow: hidden;
     flex: 1;
     background: #000;
 }

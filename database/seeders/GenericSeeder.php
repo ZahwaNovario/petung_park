@@ -71,7 +71,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => 'Jibru, Belik, Trawas, Mojokerto Regency, East Java 61375',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -80,7 +80,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => '©2024 Petung Park Trawas. All rights reserved.',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -98,7 +98,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => 'baris pertama',
-                'icon_picture_link' => '/images/galeri/pemandangan/jalanHutanBambu_2.JPG',
+                'icon_picture_link' => '/images/galeri/pemandangan/jalanHutanBambu_2.JPG', 
             ],
             [
                 'created_at' => now(),
@@ -107,7 +107,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' =>'baris kedua',
-                'icon_picture_link' =>  '/images/galeri/pemandangan/jalanHutanBambu.JPG',
+                'icon_picture_link' =>  '/images/galeri/pemandangan/jalanHutanBambu.JPG', 
             ],
             [
                 'created_at' => now(),
@@ -116,7 +116,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => 'baris ketiga',
-                'icon_picture_link' => '/images/galeri/pemandangan/pohonBambu.JPG',
+                'icon_picture_link' => '/images/galeri/pemandangan/pohonBambu.JPG', 
             ],
             [
                 'created_at' => now(),
@@ -124,12 +124,12 @@ class GenericSeeder extends Seeder
                 'user_id' => $userId->random(),
                 'status' => 1,
                 'updated_at' => now(),
-                'value' => 'Mewujudkan Dusun Jibru, Desa Belik sebagai desa mandiri dengan
-                            potensi wisata alam yang dikelola secara berkelanjutan, melalui pelestarian
-                            kearifan lokal dan sumber daya alam seperti bambu petung, serta meningkatkan
+                'value' => 'Mewujudkan Dusun Jibru, Desa Belik sebagai desa mandiri dengan 
+                            potensi wisata alam yang dikelola secara berkelanjutan, melalui pelestarian 
+                            kearifan lokal dan sumber daya alam seperti bambu petung, serta meningkatkan 
                             kesejahteraan masyarakat melalui pengembangan sektor pariwisata.
                             ',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -137,12 +137,12 @@ class GenericSeeder extends Seeder
                 'user_id' => $userId->random(),
                 'status' => 1,
                 'updated_at' => now(),
-                'value' => 'Menjaga kelestarian bambu petung sebagai ikon wisata dan sumber daya alam, serta
-                            mengembangkan Petung Park untuk mendukung perekonomian lokal. Selain itu, misi ini
+                'value' => 'Menjaga kelestarian bambu petung sebagai ikon wisata dan sumber daya alam, serta 
+                            mengembangkan Petung Park untuk mendukung perekonomian lokal. Selain itu, misi ini 
                             mendorong kemandirian desa melalui pengelolaan wisata berbasis desa yang berkelanjutan,
-                             dengan melibatkan partisipasi aktif masyarakat dalam menjaga lingkungan dan memanfaatkan
+                             dengan melibatkan partisipasi aktif masyarakat dalam menjaga lingkungan dan memanfaatkan 
                              sumber daya alam demi kesejahteraan bersama.',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -150,13 +150,13 @@ class GenericSeeder extends Seeder
                 'user_id' => $userId->random(),
                 'status' => 1,
                 'updated_at' => now(),
-                'value' => 'Petung Park, terletak di Desa Belik yang memiliki arti
+                'value' => 'Petung Park, terletak di Desa Belik yang memiliki arti 
                 "mata air kecil," memanfaatkan potensi alam desa yang kaya akan sumber mata air alami.
-                 Salah satu yang paling menonjol adalah hutan bambu Petung, seluas 3,5 hektar, yang dipenuhi oleh
-                 bambu Petung berusia ratusan tahun. Hutan ini bahkan disebut sebagai salah satu yang tertua di Jawa Timur.
-                 Awalnya, Desa Belik hanya menjadi jalur lintas di perbatasan Trawas dan Prigen, hingga kepala desa memutuskan
+                 Salah satu yang paling menonjol adalah hutan bambu Petung, seluas 3,5 hektar, yang dipenuhi oleh 
+                 bambu Petung berusia ratusan tahun. Hutan ini bahkan disebut sebagai salah satu yang tertua di Jawa Timur. 
+                 Awalnya, Desa Belik hanya menjadi jalur lintas di perbatasan Trawas dan Prigen, hingga kepala desa memutuskan 
                  untuk mengembangkan potensi wisatanya.',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -165,11 +165,11 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => 'Petung Park menawarkan pemandangan sawah hijau, hutan bambu yang rimbun,
-                  serta udara segar yang sejuk. Fasilitas wisata semakin lengkap dengan dibangunnya pujasera dan gazebo unik di tahun 2021,
-                  yang mengalirkan air langsung dari sumber mata air alami. Pengunjung dapat menikmati hidangan sambil bermain air di gazebo
-                  dengan latar pemandangan Gunung Penanggungan. Petung Park kini menjadi destinasi wisata populer yang menawarkan pengalaman
+                  serta udara segar yang sejuk. Fasilitas wisata semakin lengkap dengan dibangunnya pujasera dan gazebo unik di tahun 2021, 
+                  yang mengalirkan air langsung dari sumber mata air alami. Pengunjung dapat menikmati hidangan sambil bermain air di gazebo 
+                  dengan latar pemandangan Gunung Penanggungan. Petung Park kini menjadi destinasi wisata populer yang menawarkan pengalaman 
                   alam eksotis dan relaksasi dengan harga terjangkau, ideal untuk bersantai dan menghilangkan penat.',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -177,7 +177,7 @@ class GenericSeeder extends Seeder
                 'user_id' => $userId->random(),
                 'status' => 1,
                 'updated_at' => now(),
-                'value' => 'https://www.youtube.com/embed/QixsUsr91Jg?si=Uu-ukrVPLF9OvFNC',
+                'value' => 'https://www.youtube.com/embed/wq8MRjtlkxQ',
                 'icon_picture_link' => $footer.'logoYoutube.png',
             ],
             [
@@ -196,7 +196,7 @@ class GenericSeeder extends Seeder
                 menyebut hutan bambu petung di Belik ini
                 merupakan salah satu hutan bambu tertua di Jawa
                 Timur.',
-                'icon_picture_link' => null,
+                'icon_picture_link' => null, 
             ],
             [
                 'created_at' => now(),
@@ -205,7 +205,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => 'Jibru, Belik, Kec. Trawas, Kabupaten Mojokerto, Jawa Timur 61375',
-                'icon_picture_link' => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.217618060445!2d112.61724131177796!3d-7.659736192324794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7d92930acc995%3A0x820cde960a28c319!2sPETUNG%20PARK!5e0!3m2!1sid!2sid!4v1727851391086!5m2!1sid!2sid",
+                'icon_picture_link' => "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.217618060445!2d112.61724131177796!3d-7.659736192324794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7d92930acc995%3A0x820cde960a28c319!2sPETUNG%20PARK!5e0!3m2!1sid!2sid!4v1727851391086!5m2!1sid!2sid", 
             ],
             [
                 'created_at' => now(),
@@ -214,7 +214,7 @@ class GenericSeeder extends Seeder
                 'status' => 1,
                 'updated_at' => now(),
                 'value' => '09.00 - 17.00',
-                'icon_picture_link' => "/images/beranda/logo/jam.png",
+                'icon_picture_link' => "/images/beranda/logo/jam.png", 
             ],
         ]);
     }

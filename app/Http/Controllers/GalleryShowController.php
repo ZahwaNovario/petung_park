@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\SliderHome;
 use App\Models\Generic;
 use App\Models\Gallery;
-use App\Models\Scene;
 
 class GalleryShowController extends Controller
 {
@@ -19,8 +18,7 @@ class GalleryShowController extends Controller
     {
         $galleryShows = GalleryShow::where('status', 1)->get();
         $sliderHomes = SliderHome::where('status', 1)->get();
-        $scenes = Scene::with(['location', 'connections.sceneTo'])->get();
-
+        
         $info = [];
         $data = Generic::where('status',1)->get();
         $info = [
@@ -38,22 +36,22 @@ class GalleryShowController extends Controller
                     $info['sejarah'] = $item->value;
                     break;
                 case 'lokasi':
-                    $info['alamat'] = $item->value;
-                    $info['peta_lokasi'] = $item->icon_picture_link;
+                    $info['alamat'] = $item->value; 
+                    $info['peta_lokasi'] = $item->icon_picture_link; 
                     break;
                 case 'jam_operasional':
                     $info['jam'] = $item->value;
                     $info['jam_logo'] = $item->icon_picture_link;
-                    break;
+                    break;  
                 case 'kontak_whatsapp':
                     $info['telepon'] = preg_replace('/(\d{4})(?=\d)/', '$1-', $item->value);
                     $info['telepon_logo'] = $item->icon_picture_link;
-                    break;
+                    break;   
             }
         }
-        return view('beranda', compact('galleryShows','sliderHomes','info','scenes'));
+        return view('beranda', compact('galleryShows','sliderHomes','info'));
     }
-
+    
     public function index()
     {
         $shows = GalleryShow::all();
