@@ -18,15 +18,15 @@ class MenuController extends Controller
     public function index()
     {
         $packages = Package::all();
-        $menus= Menu::all();
-        return view('menu.index', compact('packages','menus'));
+        $menus = Menu::all();
+        return view('menu.index', compact('packages', 'menus'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {       
+    {
         $categories = Category::where('status', 1)->get();
         $users = User::where('status', 1)->get();
         $galleries = Gallery::where('status', 1)->get();
@@ -47,7 +47,7 @@ class MenuController extends Controller
                 'category_id' => 'required|integer|exists:categories,id',
                 'user_id' => 'required|email|exists:users,id',
                 'gallery_id' => 'required|integer|exists:galleries,id',
-            ],[
+            ], [
                 'name.required' => 'Nama harus diisi.',
                 'description.required' => 'Deskripsi harus diisi.',
                 'price.required' => 'Harga harus diisi.',
@@ -92,32 +92,32 @@ class MenuController extends Controller
     public function cariMenuDariId($id)
     {
         $menu = Menu::with('category')
-                    ->findOrFail($id);
-    
+            ->findOrFail($id);
+
         return view('menu.hidangan.show', compact('menu'));
     }
 
     public function like(Request $request, $menuId)
     {
-        $menu = Menu::findOrFail($menuId);
-        $sessionKey = 'liked_menu_' . $menuId;
-    
-        if (session()->has($sessionKey)) {
-            if($menu->number_love==0){
-                $menu->number_love=0;
-            }
-            else{
-                $menu->number_love--;
-            }
-            session()->forget($sessionKey);
-        } else {
-            $menu->number_love++;
-            session()->put($sessionKey, true);
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Anda harus login untuk menyukai menu ini.'], 401);
         }
-    
-        $menu->save();
-    
-        return response()->json(['number_love' => $menu->number_love]);
+
+        $menu = Menu::findOrFail($menuId);
+        $user = auth()->user();
+
+        if ($menu->likes()->where('user_id', $user->id)->exists()) {
+            $menu->likes()->detach($user->id);
+            $status = 'unliked';
+        } else {
+            $menu->likes()->attach($user->id);
+            $status = 'liked';
+        }
+
+        return response()->json([
+            'status'       => $status,
+            'number_love'  => $menu->likes()->count(),
+        ]);
     }
 
     /**
@@ -138,28 +138,31 @@ class MenuController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'price' => 'required|numeric',
-                'status' => 'required|integer|in:1,0',
-                'recommendation' => 'required|integer',
-                'category_id' => 'required|integer|exists:categories,id',
-                'user_id' => 'required|integer|exists:users,id',
-                'gallery_id' => 'nullable|integer|exists:galleries,id',
-            ],
-            [
-                'name.required' => 'Nama harus diisi.',
-                'description.required' => 'Deskripsi harus diisi.',
-                'price.required' => 'Harga harus diisi.',
-                'status.required' => 'Status harus diisi.',
-                'recommendation.required' => 'Rekomendasi harus diisi.',
-                'category_id.required' => 'Kategori harus dipilih.',
-                'user_id.required' => 'User harus dipilih.',
-            ]);
-        
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required|string|max:255',
+                    'description' => 'required|string',
+                    'price' => 'required|numeric',
+                    'status' => 'required|integer|in:1,0',
+                    'recommendation' => 'required|integer',
+                    'category_id' => 'required|integer|exists:categories,id',
+                    'user_id' => 'required|integer|exists:users,id',
+                    'gallery_id' => 'nullable|integer|exists:galleries,id',
+                ],
+                [
+                    'name.required' => 'Nama harus diisi.',
+                    'description.required' => 'Deskripsi harus diisi.',
+                    'price.required' => 'Harga harus diisi.',
+                    'status.required' => 'Status harus diisi.',
+                    'recommendation.required' => 'Rekomendasi harus diisi.',
+                    'category_id.required' => 'Kategori harus dipilih.',
+                    'user_id.required' => 'User harus dipilih.',
+                ]
+            );
+
             $menu = Menu::findOrFail($id);
-        
+
             $menu->update([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -176,7 +179,7 @@ class MenuController extends Controller
             return redirect()->route('menu.index')->with('error', 'Menu gagal diupdate');
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -185,7 +188,7 @@ class MenuController extends Controller
     {
         try {
             $menu = Menu::findOrFail($menu);
-            $menu->status=0;
+            $menu->status = 0;
             $menu->updated_at = now();
             $menu->save();
             return redirect()->route('menu.index')->with('success', 'Menu berhasil dinonaktifkan');
@@ -194,4 +197,3 @@ class MenuController extends Controller
         }
     }
 }
-

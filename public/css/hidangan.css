@@ -13,17 +13,26 @@ html {
 /* Styling untuk tombol Kembali */
 .btn-kembali {
     font-size: medium;
-    background-color: #E2DD6C; /* Warna latar belakang tombol */
-    color: #295A3F; /* Warna teks tombol */
-    padding: 10px 15px; /* Padding di dalam tombol */
-    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    background-color: #E2DD6C;
+    /* Warna latar belakang tombol */
+    color: #295A3F;
+    /* Warna teks tombol */
+    padding: 10px 15px;
+    /* Padding di dalam tombol */
+    text-decoration: none;
+    /* Menghilangkan garis bawah pada link */
     margin-top: 10px;
     border: 0px;
-    display: inline-block; /* Menyusun tombol dalam satu baris */
-    font-weight: bold; /* Menebalkan teks tombol */
-    transition: background-color 0.3s; /* Efek transisi saat hover */
-    align-self: flex-start; /* Menempatkan tombol di awal kontainer */
-    margin-left: 20px; /* Memberi jarak dari kiri */
+    display: inline-block;
+    /* Menyusun tombol dalam satu baris */
+    font-weight: bold;
+    /* Menebalkan teks tombol */
+    transition: background-color 0.3s;
+    /* Efek transisi saat hover */
+    align-self: flex-start;
+    /* Menempatkan tombol di awal kontainer */
+    margin-left: 20px;
+    /* Memberi jarak dari kiri */
 }
 
 /* Hover effect untuk tombol Kembali */
@@ -35,13 +44,16 @@ html {
 /* Styling kategori-makanan */
 .kategori-makanan {
     background-color: #E2DD6C;
-    padding: 20px 20px; /* Jarak dalam kontainer */
+    padding: 20px 20px;
+    /* Jarak dalam kontainer */
     width: 100vw;
     position: relative;
     display: flex;
     /* flex-direction: column;  */
-    justify-content: flex-start; /* Untuk menempatkan tombol di awal */
-    align-items: flex-start; /* Agar tombol di kiri */
+    justify-content: flex-start;
+    /* Untuk menempatkan tombol di awal */
+    align-items: flex-start;
+    /* Agar tombol di kiri */
     min-height: 81vh;
 }
 
@@ -49,21 +61,25 @@ html {
     color: #295A3F;
     font-size: 40px;
     font-weight: bold;
-    margin: 35px 0; /* Jarak atas dan bawah */
-    text-align: center; /* Judul di tengah */
+    margin: 35px 0;
+    /* Jarak atas dan bawah */
+    text-align: center;
+    /* Judul di tengah */
     padding-top: 40px;
 }
 
-
-
 /* Styling gambar hidangan */
 .hidangan-gambar {
-    width: 400px;  /* Mengatur lebar gambar */
-    height: 400px; /* Mengatur tinggi gambar */
-    margin-right: 30px; /* Jarak dari gambar ke teks */
-    border: 10px solid #295A3F; 
-    border-radius: 40px; 
-    object-fit: cover; /* Gambar akan diperbesar sesuai dengan ukuran border */
+    width: 400px;
+    /* Mengatur lebar gambar */
+    height: 400px;
+    /* Mengatur tinggi gambar */
+    margin-right: 30px;
+    /* Jarak dari gambar ke teks */
+    border: 10px solid #295A3F;
+    border-radius: 40px;
+    object-fit: cover;
+    /* Gambar akan diperbesar sesuai dengan ukuran border */
 }
 
 /* Container untuk gambar dan detail hidangan */
@@ -72,27 +88,32 @@ html {
     align-items: flex-start;
     margin-top: 100px;
     padding: 20px;
-    justify-content: center; /* Memusatkan konten secara horizontal */
+    justify-content: center;
+    /* Memusatkan konten secara horizontal */
     margin: 50 auto;
 }
 
 /* Styling untuk Judul, Deskripsi, dan Harga hidangan */
 .hidangan-detail {
-    flex-grow: 1; /* Membuat detail mengisi ruang yang tersisa */
-    text-align: left; /* Tulisan rata kiri */
+    flex-grow: 1;
+    /* Membuat detail mengisi ruang yang tersisa */
+    text-align: left;
+    /* Tulisan rata kiri */
     color: #295A3F;
 }
 
 .hidangan-detail h3 {
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 10px; /* Jarak bawah dari judul ke deskripsi */
+    margin-bottom: 10px;
+    /* Jarak bawah dari judul ke deskripsi */
     color: #295A3F;
 }
 
 .hidangan-detail p {
     font-size: 18px;
-    margin-bottom: 50px; /* Jarak 20px di bawah deskripsi */
+    margin-bottom: 50px;
+    /* Jarak 20px di bawah deskripsi */
     color: #295A3F;
 }
 
@@ -100,7 +121,8 @@ html {
     font-size: 20px;
     font-weight: normal;
     color: #295A3F;
-    margin-bottom: 0px; /* Jarak 30px antara harga dan elemen di bawahnya */
+    margin-bottom: 0px;
+    /* Jarak 30px antara harga dan elemen di bawahnya */
 }
 
 /* Styling untuk tulisan Rekomendasi */
@@ -108,12 +130,15 @@ html {
     font-size: 20px;
     font-style: italic;
     color: #295A3F;
-    margin-bottom: 0px; /* Jarak antara rekomendasi dan tombol hati */
+    margin-bottom: 0px;
+    /* Jarak antara rekomendasi dan tombol hati */
 }
 
 .desc {
-    width: 400px; /* Set lebar tetap 400px */
-    margin: 0 auto; /* Memusatkan deskripsi secara horizontal jika diperlukan */
+    width: 400px;
+    /* Set lebar tetap 400px */
+    margin: 0 auto;
+    /* Memusatkan deskripsi secara horizontal jika diperlukan */
 }
 
 .rekomendasi-container {
@@ -124,8 +149,8 @@ html {
 .rekomendasi-container i {
     margin-left: 10px;
     font-size: 18px;
-    align-items: flex-end; 
-    justify-content: bottom; 
+    align-items: flex-end;
+    justify-content: bottom;
 }
 
 .rekomendasi-container img {
@@ -136,23 +161,58 @@ html {
     margin-right: 5px;
 }
 
-/* Styling tombol like berbentuk hati */
+/* Like */
 .like-button {
-    font-size: 20px;
+    font-size: 28px;
     background: none;
     border: none;
-    color: #E74C3C;
+    color: #aaa;
+    /* default abu-abu */
     cursor: pointer;
-    transition: transform 0.2s ease;
+    line-height: 1;
+    transition: transform .2s ease, color .25s ease;
 }
 
-/* Hover effect untuk tombol like */
 .like-button:hover {
-    transform: scale(1.2); /* Memperbesar tombol saat hover */
+    transform: scale(1.2)
 }
-.like-count{
-    font-size: 20px;
+
+.like-button.liked {
+    color: #E74C3C;
 }
+
+/* saat like jadi merah */
+
+.like-icon {
+    display: inline-block;
+}
+
+/* efek kecil saat berubah */
+@keyframes heart-burst {
+    0% {
+        transform: scale(1)
+    }
+
+    30% {
+        transform: scale(1.35)
+    }
+
+    60% {
+        transform: scale(0.9)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.like-button.liked .like-icon {
+    animation: heart-burst .35s ease
+}
+
+
+/* ======================================== */
+
 /* Penyesuaian untuk layar handphone */
 @media (max-width: 768px) {
     .hidangan-container {
@@ -162,33 +222,41 @@ html {
     }
 
     .hidangan-gambar {
-        width: 80%; /* Reduce size while maintaining aspect ratio */
-        max-width: 300px; 
+        width: 80%;
+        /* Reduce size while maintaining aspect ratio */
+        max-width: 300px;
         height: auto;
         display: block;
-        margin: 10px auto; /* Center horizontally */
+        margin: 10px auto;
+        /* Center horizontally */
     }
 
     .hidangan-detail {
         width: 90%;
         max-width: 350px;
-        margin-left: 0; /* Remove unnecessary margin */
+        margin-left: 0;
+        /* Remove unnecessary margin */
         text-align: center;
     }
 
     .hidangan-detail h3 {
         margin-top: 15px;
-        font-size: 26px; /* Scale down the font slightly */
+        font-size: 26px;
+        /* Scale down the font slightly */
     }
 
     .hidangan-detail p {
         font-size: 16px;
         margin-bottom: 20px;
-        line-height: 1.5; /* Improve readability */
-        word-wrap: break-word; /* Ensure long words break properly */
-        overflow-wrap: break-word; 
-        max-width: 100%; /* Prevent overflow */
-        padding: 0 10px; /* Add slight padding for better spacing */
+        line-height: 1.5;
+        /* Improve readability */
+        word-wrap: break-word;
+        /* Ensure long words break properly */
+        overflow-wrap: break-word;
+        max-width: 100%;
+        /* Prevent overflow */
+        padding: 0 10px;
+        /* Add slight padding for better spacing */
     }
 
     .like-count {
@@ -197,15 +265,19 @@ html {
 
     .kategori-makanan h2 {
         font-size: 32px;
-        margin-top: 40px; /* Adjust spacing */
+        margin-top: 40px;
+        /* Adjust spacing */
     }
 
     .btn-kembali {
         position: absolute;
-        top: 20px; /* Adjust button position */
+        top: 20px;
+        /* Adjust button position */
         left: 10px;
-        font-size: 14px; /* Scale button text */
-        padding: 8px 12px; /* Adjust padding */
+        font-size: 14px;
+        /* Scale button text */
+        padding: 8px 12px;
+        /* Adjust padding */
     }
 
     .rekomendasi-container {

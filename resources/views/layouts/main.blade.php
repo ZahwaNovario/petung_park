@@ -12,6 +12,33 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('page-css')
     @vite(['resources/css/app.css', 'resources/css/tour.css', 'resources/js/app.js'])
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">x1
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .custom-navbar {
+            --bs-navbar-color: rgba(255, 255, 255, .85) !important;
+            --bs-navbar-hover-color: rgba(255, 255, 255) !important;
+            background-color: #295A3F;
+        }
+    </style>
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
