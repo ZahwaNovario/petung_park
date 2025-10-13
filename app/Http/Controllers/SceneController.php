@@ -139,11 +139,21 @@ class SceneController extends Controller
 
     public function destroy(Scene $scene)
     {
-        // Hapus semua koneksi yang terkait
-        Connection::where('scene_from', $scene->id)->orWhere('scene_to', $scene->id)->delete();
+        Connection::where('scene_from', $scene->id)
+            ->orWhere('scene_to', $scene->id)
+            ->delete();
+
+        $locationName = strtolower(str_replace(' ', '_', $scene->location->name));
+        $fileName = strtolower(str_replace(' ', '_', $scene->name));
+
+        $files = glob(public_path('images/virtual-tour/' . $locationName . '/' . $fileName . '.*'));
+        foreach ($files as $file) {
+            if (is_file($file)) unlink($file);
+        }
+
 
         $scene->delete();
 
-        return redirect()->route('scenes.index')->with('success', 'Scene berhasil dihapus!');
+        return redirect()->route('scenes.index')->with('success', 'Scene dan file terkait berhasil dihapus!');
     }
 }
