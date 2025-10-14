@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Location;
 use App\Models\Scene;
 use App\Models\Connection;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Str;
 
 class SceneController extends Controller
 {
@@ -27,27 +29,63 @@ class SceneController extends Controller
         $request->validate([
             'location_id' => 'required|exists:locations,id',
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpg,jpeg,png',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:30000', // max 30MB
         ]);
 
-        $location = Location::findOrFail($request->location_id);
-        $locationName = strtolower(str_replace(' ', '_', $location->name));
-        $folder = 'images/virtual-tour/' . $locationName;
+        // 🔹 Generate UUID unik untuk folder scene
+        $uuid = Str::uuid()->toString();
 
-        $fileName = strtolower(str_replace(' ', '_', $request->name)) . '.' .
-            $request->file('image')->getClientOriginalExtension();
+        // 🔹 Buat path dasar folder
+        $baseFolder = public_path("images/virtual-tour/{$uuid}");
+        if (!file_exists($baseFolder)) {
+            mkdir($baseFolder, 0777, true);
+        }
 
-        $request->file('image')->move(public_path($folder), $fileName);
+        // 🔹 Buat folder resolusi
+        $resolutions = [480, 720, 1080, 1440];
+        foreach ($resolutions as $res) {
+            $resFolder = "{$baseFolder}/{$res}";
+            if (!file_exists($resFolder)) {
+                mkdir($resFolder, 0777, true);
+            }
+        }
 
-        $imagePath = $folder . '/' . $fileName;
+        // 🔹 Simpan nama file dasar
+        $originalExt = $request->file('image')->getClientOriginalExtension();
+        $fileBaseName = strtolower(str_replace(' ', '_', $request->name));
 
+        // 🔹 Baca gambar utama
+        $image = Image::make($request->file('image'));
+
+        // 🔹 Simpan versi original tanpa resize
+        $originalPath = "{$baseFolder}/original/{$fileBaseName}_original.{$originalExt}";
+        if (!file_exists("{$baseFolder}/original")) {
+            mkdir("{$baseFolder}/original", 0777, true);
+        }
+        $image->save($originalPath);
+
+        // 🔹 Resize dan simpan tiap resolusi (480,720,1080,1440)
+        foreach ($resolutions as $res) {
+            $resized = clone $image;
+            $resized->resize($res, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize(); // biar gak pecah
+            });
+            $resized->save("{$baseFolder}/{$res}/{$fileBaseName}_{$res}.{$originalExt}");
+        }
+
+        // 🔹 Path default (misal resolusi 720 untuk tampilan awal)
+        $defaultImagePath = "images/virtual-tour/{$uuid}/720/{$fileBaseName}_720.{$originalExt}";
+
+        // 🔹 Simpan scene ke database
         $scene = Scene::create([
+            'uuid' => $uuid,
             'location_id' => $request->location_id,
             'name' => $request->name,
-            'image_path' => $imagePath,
+            'image_path' => $defaultImagePath,
         ]);
 
-        // Simpan connections kalau ada
+        // 🔹 Simpan connections (jika dikirim)
         if ($request->filled('connections')) {
             $connections = json_decode($request->connections, true);
             foreach ($connections as $conn) {
@@ -55,16 +93,61 @@ class SceneController extends Controller
                     Connection::create([
                         'scene_from' => $scene->id,
                         'scene_to' => $conn['target'],
-                        'yaw' => $conn['yaw'],
-                        'pitch' => $conn['pitch'],
+                        'yaw' => $conn['yaw'] ?? 0,
+                        'pitch' => $conn['pitch'] ?? 0,
                     ]);
                 }
             }
         }
 
         return redirect()->route('scenes.index')
-            ->with('success', 'Scene & connections berhasil ditambahkan!');
+            ->with('success', 'Scene berhasil ditambahkan dan dibuat dalam 5 resolusi (480–Original)!');
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'location_id' => 'required|exists:locations,id',
+    //         'name' => 'required|string|max:255',
+    //         'image' => 'required|image|mimes:jpg,jpeg,png',
+    //     ]);
+
+    //     $location = Location::findOrFail($request->location_id);
+    //     $locationName = strtolower(str_replace(' ', '_', $location->name));
+    //     $folder = 'images/virtual-tour/' . $locationName;
+
+    //     $fileName = strtolower(str_replace(' ', '_', $request->name)) . '.' .
+    //         $request->file('image')->getClientOriginalExtension();
+
+    //     $request->file('image')->move(public_path($folder), $fileName);
+
+    //     $imagePath = $folder . '/' . $fileName;
+
+    //     $scene = Scene::create([
+    //         'location_id' => $request->location_id,
+    //         'name' => $request->name,
+    //         'image_path' => $imagePath,
+    //     ]);
+
+    //     // Simpan connections kalau ada
+    //     if ($request->filled('connections')) {
+    //         $connections = json_decode($request->connections, true);
+    //         foreach ($connections as $conn) {
+    //             if (!empty($conn['target'])) {
+    //                 Connection::create([
+    //                     'scene_from' => $scene->id,
+    //                     'scene_to' => $conn['target'],
+    //                     'yaw' => $conn['yaw'],
+    //                     'pitch' => $conn['pitch'],
+    //                 ]);
+    //             }
+    //         }
+    //     }
+
+    //     return redirect()->route('scenes.index')
+    //         ->with('success', 'Scene & connections berhasil ditambahkan!');
+    // }
 
     public function edit(Scene $scene)
     {
