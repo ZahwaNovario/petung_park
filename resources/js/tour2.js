@@ -1,94 +1,174 @@
-import Marzipano from 'marzipano';
+import Marzipano from "marzipano";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const panoEl = document.getElementById('pano');
-    const captionEl = document.getElementById('caption');
-    if (!panoEl) return;
+    const customSelect = document.getElementById("custom-resolution-select");
+    const hiddenSelect = document.getElementById("resolution-select");
 
-    const parsedData = JSON.parse(document.getElementById('scene-data').textContent);
-    const currentSceneId = parsedData.activeSceneId;
-    const sceneDataList = parsedData.scenes;
+    if (customSelect && hiddenSelect) {
+        const selectedBox = customSelect.querySelector(".select-selected");
+        const itemsContainer = customSelect.querySelector(".select-items");
+        const options = itemsContainer.querySelectorAll("div");
 
-    const viewer = new Marzipano.Viewer(panoEl);
-    const marzipanoScenes = {};
+        selectedBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            itemsContainer.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
 
-    // Kalau tidak ada scene sama sekali → tampilkan placeholder
-    if (sceneDataList.length === 0) {
-        panoEl.innerHTML = `
-                <div style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    height:100%;
-                    width:100%;
-                    background:#333;
-                    color:#fff;
-                    font-size:24px;
-                    font-weight:600;
-                    text-align:center;
-                ">
-                    Virtual Tour Coming Soon
-                </div>
-            `;
-        return;
+        options.forEach((option) => {
+            option.addEventListener("click", function () {
+                selectedBox.textContent = this.textContent;
+
+                hiddenSelect.value = this.getAttribute("data-value");
+
+                hiddenSelect.dispatchEvent(new Event("change"));
+
+                itemsContainer.classList.add("select-hide");
+                selectedBox.classList.remove("select-arrow-active");
+            });
+        });
+
+        document.addEventListener("click", function () {
+            itemsContainer.classList.add("select-hide");
+            selectedBox.classList.remove("select-arrow-active");
+        });
     }
 
+    const panoEl = document.getElementById("pano");
+    const captionEl = document.getElementById("caption");
+    const resSelect = document.getElementById("resolution-select");
+    const loadingOverlay = document.getElementById("loading-overlay");
+    if (!panoEl) return;
 
-    // Buat semua scene dari data database
-    sceneDataList.forEach(sceneData => {
-        // Gunakan placeholder jika imagePath kosong/null
-        const imagePath = sceneData.imagePath && sceneData.imagePath.trim() !== ""
-            ? sceneData.imagePath
-            : "https://via.placeholder.com/1000x563?text=Virtual+Tour+Coming+Soon";
+    const parsedData = JSON.parse(
+        document.getElementById("scene-data").textContent
+    );
+    let currentSceneId = parsedData.activeSceneId;
+    const sceneDataList = parsedData.scenes;
 
-        const source = Marzipano.ImageUrlSource.fromString(imagePath);
-        const geometry = new Marzipano.EquirectGeometry([{ width: 3000 }]);
-        const limiter = Marzipano.RectilinearView.limit.traditional(50000, 100 * Math.PI / 180);
-        const view = new Marzipano.RectilinearView(null, limiter);
-
-        const scene = viewer.createScene({
-            source: source,
-            geometry: geometry,
-            view: view,
-            pinFirstLevel: true
-        });
-
-        // Tambah hotspot
-        (sceneData.hotspots || []).forEach(hs => {
-            const el = document.createElement('div');
-            el.classList.add('hotspot-arrow');
-            el.innerHTML = "⮝";
-            el.style.cursor = "pointer";
-            el.onclick = () => switchScene(hs.targetScene);
-
-            scene.hotspotContainer().createHotspot(el, { yaw: hs.yaw, pitch: hs.pitch });
-        });
-
-        marzipanoScenes[sceneData.id] = { scene, caption: sceneData.caption };
+    const viewer = new Marzipano.Viewer(panoEl, {
+        controls: { mouseViewMode: "drag" },
     });
 
-    function switchScene(id) {
-        if (marzipanoScenes[id]) {
-            marzipanoScenes[id].scene.switchTo();
-            if (captionEl) {
-                captionEl.textContent = marzipanoScenes[id].caption || "";
+    const marzipanoScenes = {};
+    // Pastikan nilai default ini ada di folder gambarmu, misal 'medium'
+    let currentRes = "low";
+
+    // Event listener dropdown resolusi
+    if (resSelect) {
+        resSelect.addEventListener("change", (e) => {
+            currentRes = e.target.value; // Nilainya akan 'low', 'medium', 'original'
+            if (marzipanoScenes[currentSceneId]) {
+                switchScene(currentSceneId);
             }
-        } else {
-            window.location.href = `/virtual-tour/show-scene/${id}`;
+        });
+    }
+
+    // Buat semua scene
+    sceneDataList.forEach((sceneData) => {
+        const createScene = (res) => {
+            const currentPath = sceneData.imagePath;
+
+            // Regex ini mencari folder resolusi APAPUN (baik angka maupun kata)
+            // lalu menggantinya dengan 'res' yang baru ('low', 'medium', 'original').
+            let newImagePath = currentPath
+                .replace(/\/(low|medium|high|original|\d+)\//, `/${res}/`)
+                .replace(/_(low|medium|high|original|\d+)\.jpg/, `_${res}.jpg`);
+
+            console.log("Generated Image Path:", newImagePath);
+
+            const source = Marzipano.ImageUrlSource.fromString(newImagePath);
+            const geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);
+            const limiter = Marzipano.RectilinearView.limit.traditional(
+                4096,
+                (120 * Math.PI) / 180
+            );
+            const view = new Marzipano.RectilinearView(null, limiter);
+
+            const scene = viewer.createScene({
+                source,
+                geometry,
+                view,
+                pinFirstLevel: true,
+            });
+
+            (sceneData.hotspots || []).forEach((hs) => {
+                const el = document.createElement("div");
+                el.classList.add("hotspot-arrow");
+                el.textContent = "⮝";
+                el.style.cursor = "pointer";
+                el.onclick = () => switchScene(hs.targetScene);
+                scene
+                    .hotspotContainer()
+                    .createHotspot(el, { yaw: hs.yaw, pitch: hs.pitch });
+            });
+
+            return { scene, view };
+        };
+
+        marzipanoScenes[sceneData.id] = {
+            createScene,
+            caption: sceneData.caption,
+        };
+    });
+
+    // Fungsi loading (tidak ada perubahan)
+    function showLoading() {
+        const loader = document.getElementById("loading-overlay");
+        if (loader) {
+            loader.classList.add("show");
+        }
+    }
+    function hideLoading() {
+        const loader = document.getElementById("loading-overlay");
+        if (loader) {
+            loader.classList.remove("show");
+            setTimeout(() => (loader.style.display = "none"), 400);
         }
     }
 
-    // Set scene awal
-    if (marzipanoScenes[currentSceneId]) {
-        switchScene(currentSceneId);
-    } else if (sceneDataList.length > 0) {
-        switchScene(sceneDataList[0].id);
+    // Fungsi ganti scene (tidak ada perubahan)
+    function switchScene(id) {
+        const sceneObj = marzipanoScenes[id];
+        if (!sceneObj) return;
+
+        showLoading(); // tampilkan loading pas mulai ganti scene
+
+        const { scene, view } = sceneObj.createScene(currentRes);
+
+        // Event render complete dari Marzipano
+        scene.addEventListener(
+            "renderComplete",
+            () => {
+                console.log("✅ Scene render complete");
+                hideLoading();
+            },
+            { once: true }
+        );
+
+        // Fallback: sembunyikan loading kalau event gak ke-trigger dalam 2 detik
+        setTimeout(() => {
+            hideLoading();
+        }, 2000);
+
+        scene.switchTo();
+        currentSceneId = id;
+
+        if (captionEl) captionEl.textContent = sceneObj.caption || "";
+
+        // Set agar posisi awal menghadap tengah
+        view.setYaw(Math.PI);
     }
 
-    // Klik panel
-    document.querySelectorAll('#panel button').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetId = parseInt(btn.getAttribute('data-scene'), 10);
+    // Load awal
+    if (marzipanoScenes[currentSceneId]) {
+        switchScene(currentSceneId);
+    }
+
+    // Klik tombol panel kiri
+    document.querySelectorAll("#panel button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const targetId = parseInt(btn.getAttribute("data-scene"), 10);
             switchScene(targetId);
         });
     });

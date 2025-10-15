@@ -11,7 +11,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('page-css')
-    @vite(['resources/css/app.css', 'resources/css/tour.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/css/vtberanda.css', 'resources/css/tour.css', 'resources/js/app.js'])
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Location;
 use App\Models\Scene;
 use App\Models\Connection;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\ImageManagerStatic as intrvnt;
 use Illuminate\Support\Str;
 
 class SceneController extends Controller
@@ -42,11 +42,11 @@ class SceneController extends Controller
         }
 
         // 🔹 Buat folder resolusi
-        $resolutions = [480, 720, 1080, 1440];
-        foreach ($resolutions as $res) {
-            $resFolder = "{$baseFolder}/{$res}";
-            if (!file_exists($resFolder)) {
-                mkdir($resFolder, 0777, true);
+        $folders = ['low', 'medium', 'original'];
+        foreach ($folders as $folder) {
+            $path = "{$baseFolder}/{$folder}";
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
             }
         }
 
@@ -55,27 +55,32 @@ class SceneController extends Controller
         $fileBaseName = strtolower(str_replace(' ', '_', $request->name));
 
         // 🔹 Baca gambar utama
-        $image = Image::make($request->file('image'));
+        $image = intrvnt::make($request->file('image'));
 
-        // 🔹 Simpan versi original tanpa resize
+        // 🔹 Simpan versi original (tanpa resize)
         $originalPath = "{$baseFolder}/original/{$fileBaseName}_original.{$originalExt}";
-        if (!file_exists("{$baseFolder}/original")) {
-            mkdir("{$baseFolder}/original", 0777, true);
-        }
         $image->save($originalPath);
 
-        // 🔹 Resize dan simpan tiap resolusi (480,720,1080,1440)
-        foreach ($resolutions as $res) {
-            $resized = clone $image;
-            $resized->resize($res, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize(); // biar gak pecah
-            });
-            $resized->save("{$baseFolder}/{$res}/{$fileBaseName}_{$res}.{$originalExt}");
-        }
+        // 🔹 Simpan versi low (misal 720px)
+        $low = clone $image;
+        $low->resize(720, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $lowPath = "{$baseFolder}/low/{$fileBaseName}_low.{$originalExt}";
+        $low->save($lowPath);
 
-        // 🔹 Path default (misal resolusi 720 untuk tampilan awal)
-        $defaultImagePath = "images/virtual-tour/{$uuid}/720/{$fileBaseName}_720.{$originalExt}";
+        // 🔹 Simpan versi medium (misal 1440px)
+        $medium = clone $image;
+        $medium->resize(1440, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $mediumPath = "{$baseFolder}/medium/{$fileBaseName}_medium.{$originalExt}";
+        $medium->save($mediumPath);
+
+        // 🔹 Path default (misal versi low untuk tampilan awal)
+        $defaultImagePath = "images/virtual-tour/{$uuid}/low/{$fileBaseName}_low.{$originalExt}";
 
         // 🔹 Simpan scene ke database
         $scene = Scene::create([
@@ -101,8 +106,9 @@ class SceneController extends Controller
         }
 
         return redirect()->route('scenes.index')
-            ->with('success', 'Scene berhasil ditambahkan dan dibuat dalam 5 resolusi (480–Original)!');
+            ->with('success', 'Scene berhasil ditambahkan dan dibuat dalam 3 versi: Low, Medium, dan Original!');
     }
+
 
 
     // public function store(Request $request)
