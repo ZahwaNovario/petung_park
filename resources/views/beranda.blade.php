@@ -35,22 +35,22 @@
     <!-- Section Reservasi -->
 
     <!-- <section class="position-relative text-white py-5"
-                        {{-- style="background: url('{{ asset('images/galeri/pemandangan/gazeboKecek.JPG') }}') center/cover no-repeat;"> --}}
-                        <div class="overlay position-absolute w-100 h-100" style="top:0; left:0; background: rgba(41,90,63,0.7);"></div>
+                                            {{-- style="background: url('{{ asset('images/galeri/pemandangan/gazeboKecek.JPG') }}') center/cover no-repeat;"> --}}
+                                            <div class="overlay position-absolute w-100 h-100" style="top:0; left:0; background: rgba(41,90,63,0.7);"></div>
 
-                        <div class="container position-relative">
-                            <h2 class="title-beranda text-center mb-5 text-warning">Reservasi</h2>
+                                            <div class="container position-relative">
+                                                <h2 class="title-beranda text-center mb-5 text-warning">Reservasi</h2>
 
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="card shadow-lg border-0 rounded-3 text-center p-5" style="background:#fff; color:#295A3F;">
-                                        <h3 class="fw-bold mb-3">Pesan Spot Favoritmu 🎯</h3>
-                                        <p class="mb-4" style="font-size: 15px;">
-                                            Dapatkan pengalaman terbaik dengan melakukan reservasi meja atau spot pilihan Anda terlebih
-                                            dahulu.
-                                        </p>
+                                                <div class="row justify-content-center">
+                                                    <div class="col-lg-8">
+                                                        <div class="card shadow-lg border-0 rounded-3 text-center p-5" style="background:#fff; color:#295A3F;">
+                                                            <h3 class="fw-bold mb-3">Pesan Spot Favoritmu 🎯</h3>
+                                                            <p class="mb-4" style="font-size: 15px;">
+                                                                Dapatkan pengalaman terbaik dengan melakukan reservasi meja atau spot pilihan Anda terlebih
+                                                                dahulu.
+                                                            </p>
 
-                                        {{-- @guest
+                                                            {{-- @guest
                             <a href="{{ route('login') }}" class="btn btn-lg btn-success px-5 py-3 shadow-sm rounded-pill">
                                 Login untuk Reservasi
                             </a>
@@ -66,60 +66,90 @@
                                 </a>
                             @endif
                         @endguest --}}
-                                        <button id="btn-reservasi" class="btn btn-success">
-                                            Reservasi Sekarang
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
+                                                            <button id="btn-reservasi" class="btn btn-success">
+                                                                Reservasi Sekarang
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section> -->
 
     <!-- Section Virtual Tour -->
-    <section class="bg-dark text-white py-5">
-        <div class="container">
-            <h2 class="title-beranda text-center mb-5 text-warning">Virtual Tour</h2>
-
-            <div id="tour-container">
-                <div id="viewer-area">
-                    <div id="pano"></div>
-                    <div id="caption"></div>
-                </div>
+    <section id="virtual-tour" class="py-5" style="background-color:#88d28e; color:#2e7d32;">
+        <div class="container d-flex flex-column flex-md-row align-items-center">
+            <!-- LEFT SIDE -->
+            <div class="col-md-5 text-md-start text-center mb-4 mb-md-0">
+                <h2 class="fw-bold mb-3">Virtual Tour</h2>
+                <p class="mb-4">
+                    Jelajahi keindahan Petung Park secara interaktif melalui tampilan 360°.
+                    Nikmati sensasi berkeliling tanpa batas hanya dari layar Anda.
+                </p>
+                @if ($firstLocation && $firstLocation->scenes->isNotEmpty())
+                    <a href="{{ route('scene.show') }}" class="btn btn-success px-4 py-2">See More</a>
+                @endif
             </div>
 
+            <!-- RIGHT SIDE (CAROUSEL) -->
+            <div class="col-md-7">
+                <div id="vtCarousel" class="carousel caro-slide" data-bs-ride="carousel" data-bs-interval="10000"
+                    style="background-color:#000000;">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#vtCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#vtCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#vtCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#vtCarousel" data-bs-slide-to="3"></button>
+                    </div>
 
+                    <div class="carousel-inner rounded-4 overflow-hidden shadow-lg">
+                        <div class="carousel-item active">
+                            <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover rounded-4">
+                                <source src="/videos/gubuk_kecek.mp4" type="video/mp4">
+                            </video>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Gubuk Kecek</h5>
+                            </div>
+                        </div>
 
-            {{-- JSON data untuk JS --}}
-            <script id="scene-data" type="application/json">
-            {!! json_encode([
-                'activeSceneId' => optional($scenes->first())->id,
+                        <div class="carousel-item">
+                            <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover rounded-4">
+                                <source src="/videos/resto_kafe.mp4" type="video/mp4">
+                            </video>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Resto Kafe</h5>
+                            </div>
+                        </div>
 
-                'scenes' => $scenes->map(function ($s) {
-                    return [
-                        'id'          => $s->id,
-                        'name'        => $s->name,
-                        'caption'     => "Ini adalah {$s->name}.",
-                        'imagePath'   => asset($s->image_path),
-                        'locationSlug'=> optional($s->location)->slug,
+                        <div class="carousel-item">
+                            <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover rounded-4">
+                                <source src="/videos/panggung_atas.mp4" type="video/mp4">
+                            </video>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Panggung Panorama</h5>
+                            </div>
+                        </div>
 
-                        'hotspots'    => $s->connections->map(function ($c) {
-                            return [
-                                'yaw'         => $c->yaw,
-                                'pitch'       => $c->pitch,
-                                'targetScene' => optional($c->sceneTo)->id,   // atau ->slug
-                            ];
-                        })->values(),
-                    ];
-                })->values(),
-            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
-            </script>
+                        <div class="carousel-item">
+                            <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover rounded-4">
+                                <source src="/videos/pasar_preng.mp4" type="video/mp4">
+                            </video>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Pasar Preng Sewu</h5>
+                            </div>
+                        </div>
+                    </div>
 
-
-            <div class="text-center mt-3">
-                <a href="{{ route('scene.show', 1) }}" class="btn btn-warning">Show More</a>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#vtCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#vtCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
+
 
     <!-- Bagian Sejarah -->
     <section class="bg-success text-white text-center py-5">
@@ -169,7 +199,8 @@
                         <div class="col-md-4 overflow-hidden">
                             <div class="frame-image">
                                 @if ($galleryShow->gallery && $galleryShow->gallery->photo_link)
-                                    <img id="{{ $galleryShow->id }}" src="{{ asset($galleryShow->gallery->photo_link) }}"
+                                    <img id="{{ $galleryShow->id }}"
+                                        src="{{ asset($galleryShow->gallery->photo_link) }}"
                                         alt="{{ $galleryShow->name }}" class="galeri-image zoomimg">
                                 @else
                                     <p class="text-center">Tidak ada foto</p>
@@ -233,82 +264,56 @@
         @endguest
         });
     </script> --}}
-@endsection
+    {{-- @include('layouts.modalimg') --}}
 
-
-@include('layouts.modalimg')
-@section('page-js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const likeButtons = document.querySelectorAll('.like-button');
             const slider = document.querySelector('.slider');
             const slides = document.querySelectorAll('.slide');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
 
             let currentIndex = 0;
+            let autoSlideTimer = null;
+            const autoSlideInterval = 4000; // 4 detik biar halus
 
             function updateSliderPosition() {
-                const offset = -currentIndex * 100; // Calculate offset based on currentIndex
-                slider.style.transform = `translateX(${offset}%)`; // Apply the transformation
+                const offset = -currentIndex * 100;
+                slider.style.transform = `translateX(${offset}%)`;
             }
 
-            nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex + 1) % slides.length; // Move to the next slide
-                updateSliderPosition();
-            });
-
-            prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex - 1 + slides.length) % slides
-                    .length; // Move to the previous slide
-                updateSliderPosition();
-            });
-
-            updateSliderPosition();
-
-            const autoSlideInterval = 3000; // Change slide every 3 seconds
-            let autoSlideTimer = setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length; // Move to the next slide
-                updateSliderPosition();
-            }, autoSlideInterval);
-
-            document.querySelector('.slider-container').addEventListener('mouseover', () => {
-                clearInterval(autoSlideTimer); // Stop auto-slide
-            });
-
-            document.querySelector('.slider-container').addEventListener('mouseout', () => {
+            function startAutoSlide() {
+                stopAutoSlide(); // <-- penting, biar gak dobel interval
                 autoSlideTimer = setInterval(() => {
-                    currentIndex = (currentIndex + 1) % slides.length; // Resume auto-slide
+                    currentIndex = (currentIndex + 1) % slides.length;
                     updateSliderPosition();
                 }, autoSlideInterval);
+            }
+
+            function stopAutoSlide() {
+                if (autoSlideTimer) clearInterval(autoSlideTimer);
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSliderPosition();
+                startAutoSlide(); // reset timer biar gak langsung skip
             });
 
-            likeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const likeCount = button.querySelector('#like-count');
-                    const galleryId = button.dataset.galleryId;
-
-                    fetch(`/galeri/${galleryId}/like`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            },
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            likeCount.textContent = data.number_love;
-                            // showAlert(data.action === 'liked' ? 'You liked this gallery!' : 'You unliked this gallery.');
-                            // alert(data.action === 'liked' ? 'Anda menyukai foto ini!' : 'Anda batal menyukai foto ini.');
-
-                        })
-                        .catch(error => {
-                            console.error("Error updating like:", error);
-                            alert('Terjadi kesalahan saat mengupdate like Anda. Silakan coba lagi.',
-                                true);
-                        });
-                });
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSliderPosition();
+                startAutoSlide();
             });
+
+            // Pause saat mouse hover
+            const container = document.querySelector('.slider-container');
+            container.addEventListener('mouseenter', stopAutoSlide);
+            container.addEventListener('mouseleave', startAutoSlide);
+
+            // Jalankan otomatis saat pertama kali load
+            updateSliderPosition();
+            startAutoSlide();
         });
     </script>
     <script src="{{ asset('/js/imagemodal.js') }}"></script>

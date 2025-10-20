@@ -3,9 +3,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Str;
+
 class Scene extends Model
 {
-    protected $fillable = ['location_id', 'name', 'image_path', 'latitude', 'longitude'];
+    protected $fillable = ['uuid','location_id', 'name', 'image_path', 'latitude', 'longitude'];
 
     public function location()
     {

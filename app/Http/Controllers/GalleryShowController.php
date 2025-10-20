@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\GalleryShow;
 use Illuminate\Http\Request;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\SliderHome;
 use App\Models\Generic;
 use App\Models\Gallery;
+use App\Models\Location;
+
 use App\Models\Scene;
 
 class GalleryShowController extends Controller
@@ -20,9 +23,10 @@ class GalleryShowController extends Controller
         $galleryShows = GalleryShow::where('status', 1)->get();
         $sliderHomes = SliderHome::where('status', 1)->get();
         $scenes = Scene::with(['location', 'connections.sceneTo'])->get();
+        $firstLocation = Location::with('scenes')->first();
 
         $info = [];
-        $data = Generic::where('status',1)->get();
+        $data = Generic::where('status', 1)->get();
         $info = [
             'sejarah' => null,
             'visi_misi' => null,
@@ -51,7 +55,7 @@ class GalleryShowController extends Controller
                     break;
             }
         }
-        return view('beranda', compact('galleryShows','sliderHomes','info','scenes'));
+        return view('beranda', compact('galleryShows', 'sliderHomes', 'info', 'scenes', 'firstLocation'));
     }
 
     public function index()
@@ -64,7 +68,7 @@ class GalleryShowController extends Controller
      */
     public function create()
     {
-        $galleries= Gallery::where('status', 1)->get();
+        $galleries = Gallery::where('status', 1)->get();
         return view('galeri.show.create', compact('galleries'));
     }
 
@@ -120,7 +124,7 @@ class GalleryShowController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         try {
             $request->validate([
@@ -130,7 +134,7 @@ class GalleryShowController extends Controller
             ]);
 
             // Update the GalleryShow attributes
-            $galleryShow= GalleryShow::findorFail($id);
+            $galleryShow = GalleryShow::findorFail($id);
             $galleryShow->name = $request->input('name');
             $galleryShow->status = $request->input('status');
 
@@ -155,8 +159,8 @@ class GalleryShowController extends Controller
     public function unactive($gallery)
     {
         try {
-            $galleryShow= GalleryShow::findorFail($gallery);
-            $galleryShow->status=0;
+            $galleryShow = GalleryShow::findorFail($gallery);
+            $galleryShow->status = 0;
             $galleryShow->updated_at = now();
             $galleryShow->save();
             return redirect()->route('galeri.show.index')->with('success', 'Tampilan Galeri berhasil dinonaktifkan!');
@@ -165,4 +169,3 @@ class GalleryShowController extends Controller
         }
     }
 }
-

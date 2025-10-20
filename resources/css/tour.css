@@ -98,3 +98,103 @@ body {
 .back-btn:hover {
     background-color: #2980b9;
 }
+
+#loading-overlay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  transition: opacity 0.4s ease;
+}
+
+#loading-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+/* Contoh spinner sederhana */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.custom-select {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Style untuk kotak yang selalu terlihat */
+.select-selected {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 35px 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.select-selected:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Style untuk panah di kanan */
+.select-selected::after {
+    position: absolute;
+    content: "▼";
+    font-size: 12px;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+/* Putar panah saat dropdown aktif */
+.select-selected.select-arrow-active::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Style untuk container daftar pilihan */
+.select-items {
+    position: absolute;
+    background-color: #2c2c2c;
+    top: 110%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+/* Sembunyikan daftar pilihan secara default */
+.select-hide {
+    display: none;
+}
+
+/* Style untuk setiap item pilihan */
+.select-items div {
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* Efek hover pada setiap item */
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,187 @@
+#virtual-tour {
+    background: linear-gradient(135deg, #88d28e 0%, #bbdefb 100%);
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#virtual-tour::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#virtual-tour h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1b5e20;
+    letter-spacing: 0.8px;
+    margin-bottom: 1.25rem;
+    position: relative;
+    display: inline-block;
+}
+
+#virtual-tour h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #2e7d32;
+    border-radius: 2px;
+}
+
+#virtual-tour p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #424242;
+    max-width: 550px;
+    margin-bottom: 1.5rem;
+}
+
+/* Button */
+#virtual-tour .btn-primary {
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+#virtual-tour .btn-primary:hover {
+    background: linear-gradient(135deg, #66bb6a, #388e3c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 125, 50, 0.5);
+    color: white;
+}
+
+.caro-slide {
+    min-width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    position: relative;
+    /* Make the slide relative for absolute positioning of overlay */
+}
+/* Carousel Container */
+#vtCarousel {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    position: relative;
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+#vtCarousel video {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+#vtCarousel .carousel-item.active video {
+    transform: scale(1.02);
+}
+
+/* Caption */
+#vtCarousel .carousel-caption {
+    bottom: 22px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 0.7rem 1.2rem;
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#vtCarousel .carousel-caption h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Controls (PANAH) */
+#vtCarousel .carousel-control-prev,
+#vtCarousel .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgb(91, 202, 72);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#vtCarousel .carousel-control-prev:hover,
+#vtCarousel .carousel-control-next:hover {
+    background: rgba(46, 125, 50, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+#vtCarousel .carousel-control-prev-icon,
+#vtCarousel .carousel-control-next-icon {
+    background-size: 60%;
+    filter: invert(1);
+}
+
+/* Indicators (INDIKATOR) */
+#vtCarousel .carousel-indicators {
+    bottom: 15px;
+    margin-bottom: 0;
+}
+
+#vtCarousel .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#vtCarousel .carousel-indicators .active {
+    background-color: #2e7d32;
+    transform: scale(1.3);
+    border: none;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.3);
+}
+
+@media (max-width: 992px) {
+    #virtual-tour .container { flex-direction: column; text-align: center; }
+    #virtual-tour p { margin-left: auto; margin-right: auto; }
+    #vtCarousel .carousel-caption { text-align: center; left: 50%; right: auto; transform: translateX(-50%); max-width: 90%; }
+    #vtCarousel video { height: 320px; }
+}
+@media (max-width: 576px) {
+    #virtual-tour h2 { font-size: 1.8rem; }
+    #vtCarousel video { height: 240px; }
+    #virtual-tour .btn-primary { padding: 0.65rem 1.5rem; font-size: 0.95rem; }
+    #vtCarousel .carousel-control-prev,
+    #vtCarousel .carousel-control-next { width: 40px; height: 40px; }
+}

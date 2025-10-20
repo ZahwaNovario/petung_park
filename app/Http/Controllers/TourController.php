@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\Scene;
+use App\Models\Connection;
 
 use Illuminate\Http\Request;
 
@@ -28,25 +29,22 @@ class TourController extends Controller
     }
 
     // Halaman Scene Viewer
-    public function showScene($id)
+    public function showScene($id = null)
     {
-        $scene = Scene::with(['location', 'connections.sceneTo'])->find($id);
+        $firstLocation = Location::with('scenes')->first();
+        // Default ke scene id 1
+        $sceneId = $id ?? $firstLocation->scenes->first()->id;
+        // Ambil scene berdasarkan ID
+        $scene = Scene::with(['location', 'location.scenes.connections'])->find($sceneId);
 
         if (!$scene) {
-            // bikin scene dummy untuk placeholder
-            $scene = new \stdClass();
-            $scene->id = 0;
-            $scene->name = "Coming Soon";
-            $scene->image_path = null;
-            $scene->location = (object) [
-                'name' => "Virtual Tour",
-                'slug' => "virtual-tour",
-                'scenes' => collect([])
-            ];
-            $scene->connections = collect([]);
+            abort(404, 'Scene not found');
         }
 
-        return view('virtualtourhome.scene', compact('scene'));
+        // Ambil koneksi yang berawal dari scene ini
+        $connection = connection::where('scene_from', $sceneId)->get();
+
+        return view('virtualtourhome.scene', compact('scene', 'connection'));
     }
 
     public function preview()

@@ -16,6 +16,42 @@
         .preview-container {
             margin-top: 2rem;
         }
+
+        /* 🔹 Overlay Loading Upload */
+        #upload-loading {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .upload-spinner {
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid #4fc3f7;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 @endsection
 
@@ -26,7 +62,7 @@
 
     <div class="form-container">
         <h1>Edit Scene</h1>
-        <form method="POST" action="{{ route('scenes.update', $scene->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('scenes.update', $scene->id) }}" enctype="multipart/form-data" id="sceneForm">
             @csrf
             @method('PUT')
 
@@ -73,6 +109,12 @@
             <ul id="connectionList" style="list-style:none; padding:0; font-size:14px; color:#444;"></ul>
         </div>
     </div>
+
+    <!-- 🔹 Overlay Loading Upload -->
+    <div id="upload-loading">
+        <div class="upload-spinner"></div>
+        <p>Uploading & Processing your 360° image...</p>
+    </div>
 @endsection
 
 @section('page-js')
@@ -80,8 +122,20 @@
         window.currentScene = @json($scene);
         window.allScenes = @json($allScenes);
         window.existingConnections = @json($existingConnections ?? []);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("sceneForm");
+            const loadingOverlay = document.getElementById("upload-loading");
+
+            if (form) {
+                form.addEventListener("submit", () => {
+                    // munculkan overlay
+                    loadingOverlay.style.display = "flex";
+                });
+            }
+        });
     </script>
-{{--
+    {{--
     <script src="{{ asset('js/preview.js') }}" defer></script>
     <!-- @vite(['resources/js/app.js']) --> --}}
 @endsection
