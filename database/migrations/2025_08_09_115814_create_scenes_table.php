@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('scenes', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
             $table->foreignId('location_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('image_path');

@@ -8,6 +8,7 @@ use App\Models\Scene;
 use App\Models\Connection;
 use Intervention\Image\ImageManagerStatic as intrvnt;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class SceneController extends Controller
 {
@@ -180,34 +181,98 @@ class SceneController extends Controller
 
 
 
+    // public function update(Request $request, Scene $scene)
+    // {
+    //     $request->validate([
+    //         'location_id' => 'required|exists:locations,id',
+    //         'name' => 'required|string|max:255',
+    //         'image' => 'nullable|image|mimes:jpg,jpeg,png',
+    //     ]);
+
+    //     $data = [
+    //         'location_id' => $request->location_id,
+    //         'name' => $request->name,
+    //     ];
+
+    //     if ($request->hasFile('image')) {
+    //         $location = Location::findOrFail($request->location_id);
+    //         $locationName = strtolower(str_replace(' ', '_', $location->name));
+    //         $folder = 'images/' . $locationName;
+
+    //         $fileName = strtolower(str_replace(' ', '_', $request->name)) . '.' .
+    //             $request->file('image')->getClientOriginalExtension();
+
+    //         $request->file('image')->move(public_path($folder), $fileName);
+    //         $data['image_path'] = $folder . '/' . $fileName;
+    //     }
+
+    //     $scene->update($data);
+
+    //     // Update connections
+    //     Connection::where('scene_from', $scene->id)->delete();
+    //     if ($request->filled('connections')) {
+    //         $connections = json_decode($request->connections, true);
+    //         foreach ($connections as $conn) {
+    //             if (!empty($conn['target'])) {
+    //                 Connection::create([
+    //                     'scene_from' => $scene->id,
+    //                     'scene_to' => $conn['target'],
+    //                     'yaw' => $conn['yaw'],
+    //                     'pitch' => $conn['pitch'],
+    //                 ]);
+    //             }
+    //         }
+    //     }
+
+    //     return redirect()->route('scenes.index')->with('success', 'Scene berhasil diupdate!');
+    // }
+
     public function update(Request $request, Scene $scene)
     {
         $request->validate([
             'location_id' => 'required|exists:locations,id',
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:30000',
         ]);
 
-        $data = [
-            'location_id' => $request->location_id,
-            'name' => $request->name,
-        ];
+        $scene->location_id = $request->location_id;
+        $scene->name = $request->name;
 
         if ($request->hasFile('image')) {
-            $location = Location::findOrFail($request->location_id);
-            $locationName = strtolower(str_replace(' ', '_', $location->name));
-            $folder = 'images/' . $locationName;
+            $uuid = $scene->uuid;
+            $baseFolder = public_path("images/virtual-tour/{$uuid}");
 
-            $fileName = strtolower(str_replace(' ', '_', $request->name)) . '.' .
-                $request->file('image')->getClientOriginalExtension();
+            // Bersihkan isi folder lama
+            foreach (['low', 'medium', 'original'] as $folder) {
+                File::cleanDirectory("{$baseFolder}/{$folder}");
+            }
 
-            $request->file('image')->move(public_path($folder), $fileName);
-            $data['image_path'] = $folder . '/' . $fileName;
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $fileBaseName = strtolower(str_replace(' ', '_', $request->name));
+            $image = intrvnt::make($request->file('image'));
+
+            $image->save("{$baseFolder}/original/{$fileBaseName}_original.{$ext}");
+
+            $low = clone $image;
+            $low->resize(720, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $low->save("{$baseFolder}/low/{$fileBaseName}_low.{$ext}");
+
+            $medium = clone $image;
+            $medium->resize(1440, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $medium->save("{$baseFolder}/medium/{$fileBaseName}_medium.{$ext}");
+
+            $scene->image_path = "images/virtual-tour/{$uuid}/low/{$fileBaseName}_low.{$ext}";
         }
 
-        $scene->update($data);
+        $scene->save();
 
-        // Update connections
+        // Update koneksi
         Connection::where('scene_from', $scene->id)->delete();
         if ($request->filled('connections')) {
             $connections = json_decode($request->connections, true);
@@ -216,8 +281,8 @@ class SceneController extends Controller
                     Connection::create([
                         'scene_from' => $scene->id,
                         'scene_to' => $conn['target'],
-                        'yaw' => $conn['yaw'],
-                        'pitch' => $conn['pitch'],
+                        'yaw' => $conn['yaw'] ?? 0,
+                        'pitch' => $conn['pitch'] ?? 0,
                     ]);
                 }
             }
@@ -226,23 +291,43 @@ class SceneController extends Controller
         return redirect()->route('scenes.index')->with('success', 'Scene berhasil diupdate!');
     }
 
+    // public function destroy(Scene $scene)
+    // {
+    //     Connection::where('scene_from', $scene->id)
+    //         ->orWhere('scene_to', $scene->id)
+    //         ->delete();
+
+    //     $locationName = strtolower(str_replace(' ', '_', $scene->location->name));
+    //     $fileName = strtolower(str_replace(' ', '_', $scene->name));
+
+    //     $files = glob(public_path('images/virtual-tour/' . $locationName . '/' . $fileName . '.*'));
+    //     foreach ($files as $file) {
+    //         if (is_file($file)) unlink($file);
+    //     }
+
+
+    //     $scene->delete();
+
+    //     return redirect()->route('scenes.index')->with('success', 'Scene dan file terkait berhasil dihapus!');
+    // }
     public function destroy(Scene $scene)
     {
-        Connection::where('scene_from', $scene->id)
+        // Hapus semua koneksi yang terkait
+        \App\Models\Connection::where('scene_from', $scene->id)
             ->orWhere('scene_to', $scene->id)
             ->delete();
 
-        $locationName = strtolower(str_replace(' ', '_', $scene->location->name));
-        $fileName = strtolower(str_replace(' ', '_', $scene->name));
-
-        $files = glob(public_path('images/virtual-tour/' . $locationName . '/' . $fileName . '.*'));
-        foreach ($files as $file) {
-            if (is_file($file)) unlink($file);
+        // Hapus folder UUID
+        if ($scene->uuid) {
+            $folderPath = public_path("images/virtual-tour/{$scene->uuid}");
+            if (File::exists($folderPath)) {
+                File::deleteDirectory($folderPath);
+            }
         }
 
-
+        // Hapus dari database
         $scene->delete();
 
-        return redirect()->route('scenes.index')->with('success', 'Scene dan file terkait berhasil dihapus!');
+        return redirect()->route('scenes.index')->with('success', 'Scene dan semua gambar telah dihapus!');
     }
 }
